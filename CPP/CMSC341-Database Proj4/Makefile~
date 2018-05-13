@@ -1,0 +1,11 @@
+Driver.out: test5.o MinMaxHeap.o 
+	g++ -Wall -ansi -g test5.o MinMaxHeap.o -o Driver.out
+
+force:
+	make -B
+
+clean:
+	rm *.o *.out
+
+run:
+	./Driver.out

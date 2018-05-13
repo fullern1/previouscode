@@ -1,0 +1,516 @@
+//Nathaniel Fuller
+//CMSC 341 proj 4
+//MinMaxHeap.cpp
+
+#ifndef _MINMAXHEAP_CPP_
+#define _MINMAXHEAP_CPP_
+
+#include <iostream>
+#include <string>
+#include <stdexcept>
+
+using namespace std;
+
+#include "MinMaxHeap.h"
+
+template <typename T>
+MinMaxHeap<T>::MinMaxHeap(int capacity){
+  minHeap = new Heap<T>(capacity);
+  maxHeap = new Heap<T>(capacity);
+
+  // assign each heap a pointer to the other
+  minHeap->otherPtr = maxHeap;
+  maxHeap->otherPtr = minHeap;
+}
+
+template <typename T>
+MinMaxHeap<T>::MinMaxHeap(const MinMaxHeap<T>& other){
+  minHeap = new Heap<T>(*(other.minHeap));
+  maxHeap = new Heap<T>(*(other.maxHeap));
+
+  // assign each heap a pointer to the other
+  minHeap->otherPtr = maxHeap;
+  maxHeap->otherPtr = minHeap;
+}
+
+template <typename T>
+Heap<T>::Heap(const Heap<T>& other){
+  for (int i = 0; i < other.heapSize; i++){
+    data[i] = other.data[i];
+    otherHeapLoc[i] = other.otherHeapLoc[i];
+  }
+  heapCapacity = other.heapCapacity;
+  heapSize = other.heapSize;
+  endHeap = other.endHeap;
+}
+
+template <typename T>
+const MinMaxHeap<T>& MinMaxHeap<T>::operator=(const MinMaxHeap<T>& rhs){
+  if (this == &rhs) return *this;
+
+  delete minHeap;
+  delete maxHeap;
+
+  minHeap = new Heap<T>(*(rhs.minHeap));
+  maxHeap = new Heap<T>(*(rhs.maxHeap));
+
+  return *this;
+}
+
+template <typename T>
+MinMaxHeap<T>::~MinMaxHeap(){
+  //destructor
+  delete minHeap;
+  delete maxHeap;
+}
+
+template <typename T>
+Heap<T>::Heap(int capacity){
+
+  otherHeapLoc[capacity+1];
+  heapCapacity = capacity;
+  heapSize = 0;
+  endHeap = 1;
+}
+
+template <typename T>
+Heap<T>::~Heap(){
+  //destructor
+}
+
+template <typename T>
+void MinMaxHeap<T>::insert(const T& data){
+  // if heap is full throw out_of_range exception
+  if (this->minHeap->heapSize == this->minHeap->heapCapacity){
+    throw out_of_range("Heap is full");
+  }
+
+  //insert data into both heaps
+  minHeap->data[minHeap->endHeap] = data;
+  maxHeap->data[maxHeap->endHeap] = data;
+
+  minHeap->otherHeapLoc[minHeap->endHeap] = maxHeap->endHeap;
+  maxHeap->otherHeapLoc[maxHeap->endHeap] = minHeap->endHeap;
+
+  minHeap->heapSize++;
+  minHeap->endHeap++;
+
+  maxHeap->heapSize++;
+  maxHeap->endHeap++;
+
+  //update both heaps - bubble up/trickle down if needed
+  minHeap->updateMin(minHeap->endHeap-1);
+  maxHeap->updateMax(maxHeap->endHeap-1);
+}
+
+template <typename T>
+void MinMaxHeap<T>::dump(){
+  // Min heap dump
+  cout << "\n... MinMaxHeap::dump() ...\n\n";
+  cout << "------------Min Heap------------\n";
+  cout << "size = " << minHeap->heapSize << ", capacity = " 
+       << minHeap->heapCapacity << endl;
+  for (int i = 1; i <= minHeap->heapSize; i++){
+    cout << "Heap[" << i << "] = (" << minHeap->data[i] << "," 
+	 << minHeap->otherHeapLoc[i] << ")\n";
+  }
+
+  // Max heap dump
+  cout << "------------Max Heap------------\n";
+  cout << "size = " << maxHeap->heapSize << ", capacity = "
+       << maxHeap->heapCapacity << endl;
+  for (int i = 1; i <= maxHeap->heapSize; i++){
+    cout << "Heap[" << i << "] = (" << maxHeap->data[i] << ","
+         << maxHeap->otherHeapLoc[i] << ")\n";
+  }
+  cout << endl;
+}
+
+template <typename T>
+T MinMaxHeap<T>::deleteMin(){
+  if (minHeap->heapSize == 0){
+    throw out_of_range("Heap is empty");
+  }
+
+  T value = minHeap->data[1];
+  int loc = minHeap->otherHeapLoc[1];
+
+  minHeap->swap(1, minHeap->endHeap-1);
+
+  // decrement size of heap and end of heap to "delete" from heap
+  minHeap->heapSize--;
+  minHeap->endHeap--;
+
+  // remove value from max heap
+
+  maxHeap->swap(loc, maxHeap->endHeap-1);
+
+  // decrement size of heap and end of heap
+  maxHeap->heapSize--;
+  maxHeap->endHeap--;
+
+  // update both heaps
+  maxHeap->updateMax(loc);
+  minHeap->updateMin(1);
+
+  return value;
+}
+
+template <typename T>
+T MinMaxHeap<T>::deleteMax(){
+  if (maxHeap->heapSize == 0){
+    throw out_of_range("Heap is empty");
+  }
+
+  // save value to be deleted
+  T value = maxHeap->data[1];
+  int loc = maxHeap->otherHeapLoc[1];
+
+  maxHeap->swap(1, maxHeap->endHeap-1);
+  
+  // decrement size of heap and end of heap to "delete" from heap
+  maxHeap->heapSize--;
+  maxHeap->endHeap--;
+
+  minHeap->swap(loc, minHeap->endHeap-1);
+
+  // decrement size of heap and end of heap
+  minHeap->heapSize--;
+  minHeap->endHeap--;
+
+  // update both heaps
+  maxHeap->updateMax(1);
+  minHeap->updateMin(loc);
+  
+  return value;
+}
+
+template <typename T>
+void MinMaxHeap<T>::locateMin(int pos, T& data, int& index){
+  data = minHeap->data[pos];
+  index = minHeap->otherHeapLoc[pos];
+}
+
+template <typename T>
+void MinMaxHeap<T>::locateMax(int pos, T& data, int& index){
+  data = maxHeap->data[pos];
+  index = maxHeap->otherHeapLoc[pos];
+}
+
+template <typename T>
+int MinMaxHeap<T>::size(){
+  return minHeap->heapSize;
+}
+
+template <typename T>
+void Heap<T>::updateMin(int location){
+  int parent;
+  int childOne;
+  int childTwo;
+  int option = 0;
+
+  // if heap is only 1 item no updating needed
+  if (heapSize <= 1){
+    return;
+  }
+
+  // get parent/child numbers
+  parent = location/2;
+  childOne = 2*location;
+  childTwo = 2*location+1;
+
+  // special case for duplicates
+  if (data[parent] == data[location]){
+    return;
+  }
+  
+  if (childOne <= heapSize){
+    option++;
+  }
+  if (childTwo <= heapSize){
+    option++;
+  }
+  if (parent == 0){
+    option++;
+    if (childOne > heapSize && childTwo > heapSize){
+      return;
+    }
+    else if (childOne <= heapSize && childTwo > heapSize){
+      option = 4;
+    }
+  }
+  
+  // -------------------- NO CHILD ---------------------------      
+  // option == 0 --> no children
+  if (option == 0){
+    // best case --> no updating needed
+    if (data[location] > data[parent]){
+      return;
+    }
+    // otherwise switch with parent
+    else{
+      swap(parent, location);
+    }
+    // pass in parent node to see if updating needed
+    return updateMin(parent);
+  }
+  
+  // ---------------- ONE CHILD -------------------------
+  // option == 1 --> one child (childOne)
+  else if (option == 1){
+    // if larger than parent and smaller than child == no updating
+    if (data[location] > data[parent] && data[location] < data[childOne]){
+      return;
+    }
+    // if curr node is greater than child then switch
+    else if (data[location] > data[childOne]){
+      swap(location, childOne);
+      
+      // pass new child node to update func
+      return updateMin(childOne);
+    }
+    // otherwise curr node is less than parent node
+    else{
+      swap(parent, location);
+      
+      // pass parent node to see if updating needed
+      return updateMin(parent);
+    }
+  }
+  
+  // --------------- TWO CHILDREN ------------------------
+  // option == 2 --> two children
+  else if (option == 2){
+    // if curr loc > parent and less than both children = no update
+    if (data[location] > data[parent] && data[location] < data[childOne] &&
+	data[location] < data[childTwo]){
+      return;
+    }
+    // if greater than either child switch with smaller child
+    else if (data[location] > data[childOne] || 
+	     data[location] > data[childTwo]){
+      // if child one is smaller, switch c1
+      if (data[childOne] < data[childTwo]){
+	swap(location, childOne);
+	
+	// pass new child node to update func
+	return updateMin(childOne);
+      }
+      // otherwise child two is smaller, switch c2
+      else if(data[childTwo] < data[childOne]){
+	swap(location, childTwo);
+	
+	// pass new child node to update func
+	return updateMin(childTwo);
+      }
+      // otherwise smaller than parent, switch parent
+      else{
+	swap(parent, location);
+
+	// pass parent node to see if updating needed
+	return updateMin(parent);
+      }
+    }
+  }
+  // --------------- TWO CHILDREN, NO PARENT ---------------------
+  // option == 3 --> two children, no parent (aka root node)
+  else if (option == 3){
+    // if curr loc is less than both children = no update
+    if (data[location] < data[childOne] && data[location] < data[childTwo]){
+      return;
+    }
+    // if greater than either child switch with smaller child
+    else if (data[location] > data[childOne] ||
+             data[location] > data[childTwo]){
+      // if child one is smaller, switch c1
+      if (data[childOne] < data[childTwo]){
+        swap(location, childOne);
+	
+        // pass new child node to update func
+        return updateMin(childOne);
+      }
+      // otherwise child two is smaller, switch c2
+      else{
+        swap(location, childTwo);
+
+        // pass new child node to update func
+        return updateMin(childTwo);
+      }
+    }
+  }
+  // -------------- ONE CHILD, NO PARENT ----------------------
+  // option == 4 --> one child, no parent ( aka root node)
+  else if (option == 4){
+    if (data[location] < data[childOne]){
+      return;
+    }
+    swap(location, childOne);
+  }
+}
+
+template <typename T>
+void Heap<T>::updateMax(int location){
+  int parent;
+  int childOne;
+  int childTwo;
+  int option = 0;
+
+  // if heap is only 1 item no updating needed
+  if (heapSize <= 1){
+    return;
+  }
+
+  // get parent/child numbers
+  parent = location/2;
+  childOne = 2*location;
+  childTwo = 2*location+1;
+
+  // special case for duplicate
+  if (data[parent] == data[location]){
+    return;
+  }
+  
+  if (childOne <= heapSize){
+    option++;
+  }
+  if (childTwo <= heapSize){
+    option++;
+  }
+  if (parent == 0){
+    option++;
+    if (childOne > heapSize && childTwo > heapSize){
+      return;
+    }
+    else if (childOne <= heapSize && childTwo > heapSize){
+      option = 4;
+    }
+  }
+  
+  // -------------------- NO CHILD ---------------------------
+  // option == 0 --> no children
+  if (option == 0){
+    // best case --> no updating needed
+    if (data[location] < data[parent]){
+      return;
+    }
+    // otherwise switch with parent
+    else{
+      swap(parent, location);
+    }
+    // pass in parent node to see if updating needed
+    return updateMax(parent);
+  }
+  
+  // ---------------- ONE CHILD -------------------------
+  // option == 1 --> one child (childOne)
+  else if (option == 1){
+    // if smaller than parent and larger than child == no updating
+    if (data[location] < data[parent] && data[location] > data[childOne]){
+      return;
+    }
+    // if curr node is less than child then switch
+    else if (data[location] < data[childOne]){
+      swap(location, childOne);
+
+      // pass new child node to update func
+      return updateMax(childOne);
+    }
+    // otherwise curr node is greater than parent node
+    else{
+      swap(parent, location);
+
+      // pass parent node to see if updating needed
+      return updateMax(parent);
+    }
+  }
+  // --------------- TWO CHILDREN ------------------------
+  // option == 2 --> two children
+  else if (option == 2){
+    // if curr loc < parent and greater than both children = no update
+    if (data[location] < data[parent] && data[location] > data[childOne] &&
+        data[location] > data[childTwo]){
+      return;
+    }
+    // if less than either child switch with larger child
+    else if (data[location] < data[childOne] ||
+             data[location] < data[childTwo]){
+      // if child one is larger, switch c1
+      if (data[childOne] > data[childTwo]){
+	swap(location, childOne);
+	
+        // pass new child node to update func
+        return updateMax(childOne);
+      }
+      // otherwise child two is larger, switch c2
+      else if(data[childTwo] > data[childOne]){
+	swap(location, childTwo);
+
+        // pass new child node to update func
+        return updateMax(childTwo);
+      }
+      // otherwise curr node is greater than parent node
+    }      
+    else{
+      swap(parent, location);
+      
+      // pass parent node to see if updating needed
+      return updateMax(parent);
+    }
+  }
+  // --------------- TWO CHILDREN, NO PARENT ---------------------
+  // option == 3 --> two children, no parent (aka root node)
+  else if (option == 3){
+    // if curr loc is greater than both children = no update
+    if (data[location] > data[childOne] && data[location] > data[childTwo]){
+      return;
+    }
+    // if less than either child switch with smaller child
+    else if (data[location] < data[childOne] ||
+             data[location] < data[childTwo]){
+      // if child one is larger, switch c1
+      if (data[childOne] > data[childTwo]){
+        swap(location, childOne);
+	
+        // pass new child node to update func
+        return updateMax(childOne);
+      }
+      // otherwise child two is larger, switch c2
+      else{
+        swap(location, childTwo);
+	
+        // pass new child node to update func
+        return updateMax(childTwo);
+      }
+    }
+  }
+  // ------------ ONE CHILD, NO PARENT ------------------
+  // opttion == 4 --> one child, no parent (aka root node)
+  else if (option == 4){
+    if (data[location] > data[childOne]){
+      return;
+    }
+    swap(location, childOne);
+  }
+}
+
+template <typename T>
+void Heap<T>::swap(int parent, int child){
+  // parent data stored temporarily
+  T tempData = data[parent];
+  int tempHeapLoc = otherHeapLoc[parent];
+  
+  // parent data = child data
+  data[parent] = data[child];
+  otherHeapLoc[parent] = otherHeapLoc[child];
+
+  // child data = stored parent data
+  data[child] = tempData;
+  otherHeapLoc[child] = tempHeapLoc;
+
+  // update locations in other heap
+  otherPtr->otherHeapLoc[otherHeapLoc[child]] = child;
+  otherPtr->otherHeapLoc[otherHeapLoc[parent]] = parent;
+}
+
+#endif
+

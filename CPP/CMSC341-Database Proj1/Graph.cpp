@@ -1,0 +1,224 @@
+// Graph.cpp
+// Nathaniel Fuller
+// Project 1
+// CMSC 341
+
+#include "Graph.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+Graph::Graph(int n){
+  if (n < 1){
+    throw out_of_range("Value out of range. Must be greater than 0.");
+  }
+  m_size = n;
+  // List of size n of node pointers
+  m_adjLists = new AdjListNode*[n];
+  for (int i = 0; i < n; i++){
+    AdjListNode* temp = new AdjListNode;
+    m_adjLists[i] = temp;
+    // set pointer to NULL then delete
+    temp = NULL;
+    delete temp;
+  }
+}
+
+Graph::Graph(const Graph& g){
+  m_size = g.m_size;
+  // creates empty graph w/ array of linked lists
+  m_adjLists = new AdjListNode*[m_size];  
+  for (int i = 0; i < m_size; i++){
+    AdjListNode* temp = new AdjListNode;
+    m_adjLists[i] = temp;
+    // set pointer to NULL then delete
+    temp = NULL;
+    delete temp;
+  }
+  // fills in array of linked lists
+  for (int i = 0; i < m_size; i++){
+    while(g.m_adjLists[i]->next != NULL){
+      AdjListNode* temp = new AdjListNode;
+      temp->m_vertex = g.m_adjLists[i]->m_vertex;
+      temp->next = m_adjLists[i];
+      m_adjLists[i] = temp;
+      g.m_adjLists[i] = g.m_adjLists[i]->next;
+      
+      temp = NULL;
+      delete temp;
+    }
+  }
+}
+
+const Graph& Graph::operator= (const Graph& rhs){
+  if (this != &rhs){
+    this->m_size = rhs.m_size;
+    this->m_adjLists = rhs.m_adjLists;
+  }
+  return *this;
+}
+
+Graph::~Graph(){
+
+}
+
+int Graph::size(){
+  return m_size;
+}
+
+void Graph::addEdge(int u, int v){
+  // create new node, set next equal to first node in list
+  // pointer to add edge (u,v)
+  AdjListNode* temp = new AdjListNode(v, NULL);
+
+  temp->next = m_adjLists[u];
+  m_adjLists[u] = temp;
+
+  temp = NULL;
+  temp = new AdjListNode(u, NULL);
+  temp->next = m_adjLists[v];
+  m_adjLists[v] = temp;
+
+  // set pointers to NULL then delete
+  temp = NULL;
+  delete temp;
+}
+
+void Graph::dump(){
+  cout << "Dump out graph (size = " << m_size << "):" << endl;
+  for (int i = 0; i < m_size; i++){
+    cout << "[" << i << "]: ";
+    AdjListNode* temp = m_adjLists[i];
+    // if pointer to next vertex is null don't print
+    while (temp->next != NULL){
+      cout << temp->m_vertex << " ";
+      temp = temp->next;
+    }
+    temp = NULL;
+    delete temp;
+    cout << endl;
+  }
+}
+
+Graph::AdjListNode::AdjListNode(int v, AdjListNode *ptr){
+  m_vertex = v;
+  next = ptr;
+}
+
+Graph::NbIterator::NbIterator(Graph *Gptr, int v, bool isEnd){
+  m_Gptr = Gptr;
+  m_source = v;
+  // normal iterator
+  if (isEnd == false){
+    if (Gptr != NULL){
+      m_where = m_Gptr->m_adjLists[v];
+      m_source = m_where->m_vertex;
+    }
+  }
+  // end iterator
+  else{
+    if (Gptr != NULL){
+      m_where = m_Gptr->m_adjLists[v];
+      while (m_where->next != NULL){
+	m_source = m_where->m_vertex;
+        m_where = m_where->next;
+      }
+    }
+  }
+}
+
+bool Graph::NbIterator::operator!= (const NbIterator& rhs){
+  // if end is reached return false
+  if(m_where == rhs.m_where){
+    return false;
+  }
+  else
+    return true;
+}
+
+void Graph::NbIterator::operator++(int dummy){
+  m_where = m_where->next;
+  m_source = m_where->m_vertex;
+}
+
+int Graph::NbIterator::operator*(){
+  return this->m_source;
+}
+
+Graph::NbIterator Graph::nbBegin(int v){
+  NbIterator* start = new NbIterator(this, v, false);
+  return *start;
+}
+
+Graph::NbIterator Graph::nbEnd(int v){
+  NbIterator* end = new NbIterator(this, v, true);
+  return *end;
+}
+
+Graph::EgIterator::EgIterator(Graph *Gptr, bool isEnd){
+  m_Gptr = Gptr;
+
+  // normal iterator
+  if (isEnd == false){
+    if (Gptr != NULL){
+      m_where = m_Gptr->m_adjLists[m_source];
+    }
+  }
+  // end iterator
+  else{
+    if (Gptr != NULL){
+      m_source = m_Gptr->m_size-1;
+      m_where = m_Gptr->m_adjLists[m_source];
+      // iterate to last node 
+      while (m_where->next != NULL){
+	m_where = m_where->next;
+      }
+    }
+  }
+}
+
+bool Graph::EgIterator::operator!= (const EgIterator& rhs){
+  // if end is reached return false
+  if (m_source == rhs.m_source){
+    if (m_where->m_vertex == rhs.m_where->m_vertex){
+      return false;
+    }
+    else
+      return true;
+  }
+  else
+    return true;
+}
+
+void Graph::EgIterator::operator++(int dummy){
+  m_where = m_where->next;
+  while (m_source > m_where->m_vertex){
+    if (m_where->m_vertex == -1){
+      if (m_source < m_Gptr->m_size-1){
+	m_source++;
+	m_where = m_Gptr->m_adjLists[m_source];
+      }
+      if (m_source == m_Gptr->m_size-1){
+	m_where->m_vertex = -1;
+	break;
+      }
+    }
+    else
+      m_where = m_where->next;
+  }
+}
+
+std::pair<int,int> Graph::EgIterator::operator*(){
+  make_pair(this->m_source, this->m_where->m_vertex);
+}
+
+Graph::EgIterator Graph::egBegin(){
+  EgIterator* start = new EgIterator(this, false);
+  return *start;
+}
+
+Graph::EgIterator Graph::egEnd(){
+  EgIterator* end = new EgIterator(this, true);
+  return *end;
+}

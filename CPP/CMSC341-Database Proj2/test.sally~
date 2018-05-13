@@ -1,0 +1,101 @@
+."Test program, tesing all implemented functions"     
+.                                      // . prints top of the stack
+CR                                     // prints carriage return
+
+CR
+
+// test of DUP, DROP, SWAP, and ROT
+
+."Testing DUP, DROP, SWAP, ROT:". CR
+
+15 DUP . SP . CR          // Prints 15 15 
+
+17 14 DROP . CR           // Prints 17
+
+20 30 SWAP . SP  . CR     // Prints 20 30
+
+1 3 2 ROT . SP . SP . CR CR  // Prints 1 2 3
+
+."Testing SET, @, !:". CR
+
+1 x SET             // x = 1
+x @ . CR            // printf("%d\n", x) ;
+
+x @ 1 + x !         // x = x + 1
+x @ . CR CR            // printf("%d\n", x) ;
+
+."Testing logical operators:". CR
+
+12 x !
+
+."Truth table for AND" . CR
+x @ 13 >=  x @ 11 <=   AND . CR
+x @ 13 >=  x @ 20 <=   AND . CR
+x @ 11 >=  x @  9 <=   AND . CR
+x @ 10 >=  x @ 20 <=   AND . CR
+CR
+
+."Truth table for OR" . CR
+x @ 13 >=  x @ 11 <=   OR . CR
+x @ 13 >=  x @ 20 <=   OR . CR
+x @ 11 >=  x @  9 <=   OR . CR
+x @ 10 >=  x @ 20 <=   OR . CR
+CR
+
+."Truth table for NOT" . CR
+x @ 15 >= NOT . CR
+x @  5 >= NOT . CR CR
+
+."Testing comparison operators:". CR
+17 13 <  . CR
+17 23 <  . CR
+
+35 31 <= . CR
+31 31 <= . CR
+
+91 19 == . CR
+19 19 == . CR
+
+19 19 != . CR
+91 19 != . CR
+
+37 43 >= . CR
+43 43 >= . CR
+
+61 75 >  . CR
+95 75 >  . CR CR
+
+."Testing IFTHEN, ELSE, ENDIF". CR
+9 7 < 
+IFTHEN
+   1 1 + 2 == 
+   IFTHEN
+      3 2 % 0 ==
+      IFTHEN
+        ."Math works" . CR
+      ELSE
+        ."Talk like Yoda, we do" . CR
+      ENDIF
+   ELSE
+     ."Huh???" . CR
+   ENDIF
+ELSE 
+   1 1 + 3 ==
+   IFTHEN
+      ."Fake News Reported" . CR
+   ELSE
+      ."This should print out" . CR
+   ENDIF
+ENDIF CR
+
+."Testing DO UNTIL loop". CR
+0 j SET
+
+DO
+
+  j @ 1 + j !    // j++
+  j @ . CR       // print j
+
+j @ 10 >= UNTIL  // until j >= 10
+CR
+

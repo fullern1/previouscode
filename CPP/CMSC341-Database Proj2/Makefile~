@@ -1,0 +1,8 @@
+driver.out: driver1.o Sally.o
+	g++ -Wall -ansi -g driver1.o Sally.o -o driver.out
+
+clean:
+	rm *.o *.out
+
+run: driver.out
+	./driver.out

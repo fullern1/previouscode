@@ -1,0 +1,3 @@
+Implementation of a hash table class.
+Accepts input for size of hash table and rounds up to next nearest prime number if input isn't a prime number.
+Able to rehash into a new larger or smaller table as needed.

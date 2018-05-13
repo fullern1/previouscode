@@ -1,0 +1,74 @@
+// LazyBST.h
+// Nathaniel Fuller
+
+#ifndef _LAZYBST_H_
+#define _LAZYBST_H_
+
+#include <iostream>
+
+#define DTYPE int
+
+class LazyBSTNode;
+
+class LazyBST{
+  
+  // friend class LazyBSTNode
+  friend ostream& operator<< (ostream& os, const LazyBST& T);
+
+ public:
+  LazyBST();
+  LazyBST(const LazyBST& other);
+  ~LazyBST();
+
+  const LazyBST& operator=(const LazyBST& rhs);
+
+  void insert(DTYPE key);
+  void rebalanceInsert(DTYPE key);
+  bool remove(DTYPE key);
+  bool remove(DTYPE key, int trash);
+  bool find(DTYPE key);
+
+  void rebalance();
+  DTYPE findMin();
+  DTYPE findMax();
+  void delTree();
+
+  void inorder();
+  int inorder2(int count, int array[]);
+
+  bool locate(const char *position, DTYPE& key);
+
+  bool empty() const { return nptr == NULL; }
+  void dump();
+
+  bool checkBalance();
+  void update();
+  void update(int key);
+
+  void arrayToTree(int array[], int start, int end);
+
+ private:
+  LazyBSTNode *nptr;
+};
+
+ostream& operator<< (ostream& os, const LazyBST& T);
+
+class LazyBSTNode{
+
+  friend class LazyBST;
+
+ public:
+  LazyBSTNode();
+  LazyBSTNode(DTYPE key);
+  ~LazyBSTNode();
+
+  void dump();
+
+ private:
+  DTYPE data;
+  int height;
+  int size;
+  LazyBST left, right;
+};
+
+#endif

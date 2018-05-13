@@ -1,0 +1,11 @@
+Driver.out: test7.o LazyBST.o
+	g++ -Wall -ansi -g test7.o LazyBST.o -o Driver.out
+
+force:
+	make -B
+
+clean:
+	rm *.o *.out
+
+run:
+	./Driver.out

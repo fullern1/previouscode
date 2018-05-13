@@ -1,0 +1,6 @@
+The project gave us an algorithm we had to find the global minimum to down to a certain number of decimal points.
+To do this we first had to perform a global search, then once we found that minimum we had to use a local search to refine it even more.
+
+proj.py is the simple version that finds ~11 decimal points I believe.
+
+proj1.py was my implementation to find the minimum to 100 decimal points to attempt to recieve a 100% on the project.

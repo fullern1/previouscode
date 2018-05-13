@@ -1,0 +1,135 @@
+#Nathaniel Fuller
+#CMSC 455 proj
+
+import numpy
+import decimal
+import time
+
+#t0=time.clock()
+
+D=decimal.Decimal
+decimal.getcontext().prec=101
+
+xMin=0
+yMin=0
+minVal=100
+
+#from python docs for use in decimal
+def sin(x):
+    """Return the sine of x as measured in radians.
+
+    The Taylor series approximation works best for a small value of x.
+    For larger values, first compute x = x % (2 * pi).
+
+    >>> print(sin(Decimal('0.5')))
+    0.4794255386042030002732879352
+    >>> print(sin(0.5))
+    0.479425538604
+    >>> print(sin(0.5+0j))
+    (0.479425538604+0j)
+
+    """
+    decimal.getcontext().prec += 2
+    i, lasts, s, fact, num, sign = 1, 0, x, 1, x, 1
+    while s != lasts:
+        lasts = s
+        i += 2
+        fact *= i * (i-1)
+        num *= x * x
+        sign *= -1
+        s += num / fact * sign
+    decimal.getcontext().prec -= 2
+    return +s
+
+def npfunc(i,j):
+    return numpy.exp(numpy.sin(60*i))+numpy.sin(50*numpy.exp(j))+numpy.sin(80*numpy.sin(i))+numpy.sin(numpy.sin(70*j))-numpy.sin(10*(i+j))+(i*i+j*j)/4
+
+def func(i, j):
+    return sin(D(60)*i).exp()+sin(D(50)*j.exp())+sin(D(80)*sin(i))+sin(sin(D(70)*j))-sin(D(10)*(i+j))+(i*i+j*j)/D(4)
+
+xArray=numpy.arange(-1,1.001,0.001)
+yArray=numpy.arange(-1,1.001,0.001)
+
+for i in xArray:
+    for j in yArray:
+        currVal = npfunc(i,j)
+        if currVal < minVal:
+            minVal = currVal
+            xMin = i
+            yMin = j
+
+print "Global search done"
+print "Min:", minVal
+print "X:  ", xMin
+print "Y:  ", yMin
+#print "time taken:", (time.clock()-t0)
+#t1 = time.clock()
+
+xMinD=D(str(xMin))
+yMinD=D(str(yMin))
+minValD=D(str(minVal))
+
+dx = D('.00001')
+while (dx > D('0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001')):
+#    print "current dx:", dx
+#    print "xMinD:", xMinD 
+#    print "yMinD:", yMinD
+#    print "current minValD:", minValD
+    temp=[func(xMinD-dx,yMinD+dx),
+          func(xMinD,yMinD+dx),
+          func(xMinD+dx,yMinD+dx),
+          func(xMinD-dx,yMinD),
+          minValD,
+          func(xMinD+dx,yMinD),
+          func(xMinD-dx,yMinD-dx),
+          func(xMinD,yMinD-dx),
+          func(xMinD+dx,yMinD-dx)]
+    
+    newMin = min(temp)
+    if newMin == minValD:
+#        print "newMin=minValD"
+        dx=dx/10
+    else:
+        if newMin==temp[0]:
+#            print "a"
+            xMinD=xMinD-dx
+            yMinD=yMinD+dx
+        elif newMin==temp[1]:
+#            print "b"
+            yMinD=yMinD+dx
+        elif newMin==temp[2]:
+#            print "c"
+            xMinD=xMinD+dx
+            yMinD=yMinD+dx
+        elif newMin==temp[3]:
+#            print "d"
+            xMinD=xMinD-dx
+        elif newMin==temp[5]:
+#            print "e"
+            xMinD=xMinD+dx
+        elif newMin==temp[6]:
+#            print "f"
+            xMinD=xMinD-dx
+            yMinD=yMinD-dx
+        elif newMin==temp[7]:
+#            print "g"
+            yMinD=yMinD-dx
+        elif newMin==temp[8]:
+#            print "h"
+            xMinD=xMinD+dx
+            yMinD=yMinD-dx
+
+    minValD=newMin
+
+xMinD=xMinD+dx-dx
+yMinD=yMinD+dx-dx
+minValD=func(xMinD,yMinD)
+
+decimal.getcontext().prec=100
+
+print "Local search done:"
+print "Min:",minValD
+print "X:  ",xMinD
+print "Y:  ",yMinD
+#print "Local search time:", (time.clock()-t1)
+#print "Total search time:", (time.clock()-t0)

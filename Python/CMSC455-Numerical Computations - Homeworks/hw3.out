@@ -1,0 +1,40 @@
+-------------------------------------------------------------
+test_passing_function.py running
+1 a) f(x) = sin(x)
+
+number of points: 16
+trap_int area under f(x) from  0.0  to  1.0  =  0.459548043212
+error: -0.000149650919645 
+
+number of points: 32
+trap_int area under f(x) from  0.0  to  1.0  =  0.459660283229
+error: -3.74109030243e-05 
+
+number of points: 64
+trap_int area under f(x) from  0.0  to  1.0  =  0.45968834152
+error: -9.35261158552e-06 
+
+number of points: 128
+trap_int area under f(x) from  0.0  to  1.0  =  0.459695355986
+error: -2.33814576089e-06 
+
+-------------------------------------------------------------
+1 b) f(x) = sin(x)
+
+calling x,w = gaulegf(0.0, 1.0, 8)
+area= 0.459697694132
+error: -2.72004641033e-15 
+
+calling x,w = gaulegf(0.0, 1.0, 16)
+area= 0.459697694132
+error: -2.49800180541e-15 
+
+-------------------------------------------------------------
+2) 
+
+number of dots: 803
+area: 8.03
+number of dots: 81234
+area: 8.1234
+number of dots: 8126792
+area: 8.126792

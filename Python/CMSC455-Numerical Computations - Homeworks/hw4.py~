@@ -1,0 +1,10 @@
+#Nathaniel Fuller
+#CMSC 455 Hw4
+
+import math
+
+ans1 = math.factorial(52)
+print ans1
+
+ans2 = (math.factorial(52))/(math.factorial(47)*math.factorial(5))
+print ans2

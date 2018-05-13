@@ -1,0 +1,29 @@
+multiply N by N matrices, N=100
+initialized
+N=100, c=3600, raw time=0.938389
+order N^3 normalized time=938.389 
+
+multiply N by N matrices, N=200
+initialized
+N=200, c=7200, raw time=3.72219
+order N^3 normalized time=465.274 
+
+multiply N by N matrices, N=400
+initialized
+N=400, c=14400, raw time=33.9422
+order N^3 normalized time=530.346 
+
+multiply N by N matrices, N=800
+initialized
+N=800, c=28800, raw time=309.706
+order N^3 normalized time=604.895 
+
+-----------------------------------------------------------------
+
+Comments:
+
+As N increases by 100 c doubles in size and the process takes
+5-10x longer to complete.
+
+The normalized time started extremely high for N = 100.
+As N increases the normalized time seems to be getting closer to around 600.

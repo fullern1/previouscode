@@ -1,0 +1,31 @@
+from Tkinter import *
+
+master = Tk()
+master.title("Hw3")
+
+def callback(event):
+    #prints pos of mouse click
+    #print "clicked at:", event.x, event.y
+    if (event.x > 75) and (event.x < 125) and (event.y > 100) and (event.y < 125):
+        c1.itemconfig(r1,fill="yellow")
+        c1.itemconfig(r2,fill="yellow")
+        master.title("both")
+    elif (event.x > 10) and (event.x < 125) and (event.y > 10) and (event.y < 125):
+        c1.itemconfig(r1,fill="yellow")
+        c1.itemconfig(r2,fill="")
+    elif (event.x > 75) and (event.x < 200) and (event.y > 100) and (event.y < 200):
+        c1.itemconfig(r2,fill="yellow")
+        c1.itemconfig(r1,fill="")
+    else:
+        c1.itemconfig(r1,fill="")
+        c1.itemconfig(r2,fill="")
+        
+c1 = Canvas(master, width=250, height=250)
+
+c1.bind("<Button-1>", callback)
+
+r1=c1.create_rectangle(10,10,125,125,outline="red")
+r2=c1.create_rectangle(75,100,200,200,outline="blue")
+c1.pack()
+
+mainloop()

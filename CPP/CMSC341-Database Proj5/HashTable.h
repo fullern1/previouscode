@@ -1,0 +1,52 @@
+// Nathaniel Fuller
+// CMSC 341 proj 5
+// HashTable.h
+
+#ifndef _HASHTABLE_H_
+#define _HASHTABLE_H_
+
+#include "primes.h"
+
+class HashTable{
+ public:
+  HashTable(int n=101) ;
+  HashTable (HashTable& other) ;
+  ~HashTable() ;
+
+  static char * const DELETED ;
+
+  const HashTable& operator= (HashTable& rhs) ;
+
+  unsigned int hashCode(const char *str);
+
+  void insert(const char *str) ;
+  void insertNoF(const char *str);
+  bool find(const char *str) ;
+  char * remove(const char *str) ;
+
+  int primeSearch(int n, int start = 0, int end = 17958);
+
+  void startRehash();
+  void giveUp();
+
+  bool isRehashing() ;
+  int tableSize(int table=0) ;
+  int size(int table=0) ;
+  const char * at(int index, int table=0) ;
+
+  void dump() ;
+
+ private:
+  bool rehashing;
+  char ** tableOne;
+  char ** tableTwo;
+  //  char ** tableThree;
+  int t1Size;
+  int t1Items;
+  int t2Size;
+  int t2Items;
+  //int t3Size;
+  //int t3Items;
+};
+
+#endif

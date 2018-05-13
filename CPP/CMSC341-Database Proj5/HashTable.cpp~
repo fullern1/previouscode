@@ -1,0 +1,788 @@
+// Nathaniel Fuller
+// CMSC 341 proj 5
+// HashTable.cpp
+
+#include <string.h>
+#include "HashTable.h"
+#include <stdlib.h>
+#include <iostream>
+#include <stdexcept>
+
+using namespace std;
+
+char * const HashTable::DELETED  = (char *) 1 ;
+
+/*
+  This is the default constructor for the HashTable class. The parameter n is 
+  the requested size of the hash table. If no size is given or if n is less 
+  than 101, then use the prime number 101 for the table size. (I.e., the 
+  minimum table size is 101.) If the requested size is a prime number greater 
+  than 100, then you should use that size for the table size. If the requested 
+  size is not a prime number, you should use the next highest prime number from
+  primes.h. If the requested size exceeds 199,999, then just give up and throw
+  an out_of_range exception. The HashTable object created by the constructor 
+  should be ready for insertion, search and deletion without any additional 
+  initialization.
+ */
+HashTable::HashTable(int n){
+  if (n > 199999){
+    // throw out_of_range exception
+    throw out_of_range("Given number is too large");
+  }
+
+  if (n <= 101){
+    // set table to size 101
+    tableOne = new char * [101];
+    t1Size = 101;
+    t1Items = 0;
+    rehashing = false;
+  }
+  else{
+    // binary search to find number in primes table/find first prime above n
+    int prime = primeSearch(n);
+    tableOne = new char * [prime];
+    t1Size = prime;
+    t1Items = 0;
+    rehashing = false;
+  }
+}
+
+/*
+  binary search function that finds the closest prime number above the given n
+ */
+int HashTable::primeSearch(int n, int start, int end){
+  int mid = (start+end)/2;
+
+  // best case --> mid == n
+  if (primes[mid] == n){
+    return primes[mid];
+  }
+  if (primes[mid] < n){
+    if (primes[mid] < n && n < primes[mid+1]){
+      return primes[mid+1];
+    }
+    else{
+      return primeSearch(n, mid, end);
+    }
+  }
+  if (primes[mid] > n){
+    if (primes[mid] > n && n > primes[mid-1]){
+      return primes[mid];
+    }
+    else{
+      return primeSearch(n, start, mid);
+    }
+  }
+}
+
+/*
+  This is the copy constructor for the HashTable class. If the other hash table
+  is not in incremental rehash, then copying the hash table is very 
+  straightforward. Just make sure you allocate memory for the new hash table 
+  and use strdup() to copy the strings.
+
+  On the other hand, if the other hash table has an ongoing rehash, then it 
+  doesn't make sense to make a duplicate of a hash table that is in the middle 
+  of being copied. Instead, force the other table to finish its rehashing and 
+  copy over the resulting single table.
+
+  Do not call the assignment operator from the copy constructor. If you do not 
+  want to have duplicate code, then create a third function that handles the 
+  common parts of the both functions.
+ */
+HashTable::HashTable(HashTable& other){
+  // if other is rehashing force it to consolidate to one table
+  if (other.isRehashing() == true){
+    other.giveUp();
+  }
+  
+  // copy table from other
+  tableOne = new char * [other.tableSize()];
+  t1Size = other.tableSize();
+  t1Items = other.size();
+  for (int i = 0; i < t1Size; i++){
+    if (other.at(i) != NULL){
+      if (other.at(i) == DELETED){
+	tableOne[i] = DELETED;
+      }
+      else{
+	tableOne[i] = strdup(other.at(i));
+      }
+    }
+  }
+}
+
+
+/*
+  This is the destructor. Make sure you deallocate all memory for this object. 
+  The strings in the hash table must be deallocated using free() since they are
+  C strings (i.e., don't use remove for C strings).
+ */
+HashTable::~HashTable(){
+  for (int i = 0; i < t1Size; i++){
+    free(tableOne[i]);
+  }
+  delete tableOne;
+  if (rehashing == true){
+    for (int i = 0; i < t2Size; i++){
+      free(tableTwo[i]);
+    }
+    delete tableTwo;
+  }
+}
+
+/*
+  function code given in project description -- don't change
+ */
+unsigned int HashTable::hashCode(const char *str) {
+
+  unsigned int val = 0 ;
+  const unsigned int thirtyThree = 33 ;  // magic number from textbook
+
+  int i = 0 ;
+  while (str[i] != '\0') {
+    val = val * thirtyThree + str[i] ;
+    i++ ;
+  }
+  return val ;
+}
+
+void HashTable::startRehash(){
+  int newSize = primeSearch(4*(t1Items+1));
+  tableTwo = new char * [newSize];
+  t2Size = newSize;
+  t2Items = 0;
+}
+
+void HashTable::giveUp(){
+  int newSize = primeSearch(4*(t1Items+t2Items+1));
+  rehashing = true;
+  // move everything from t1 to t2
+  for (int i = 0; i < t1Size; i++){
+    if (tableOne[i] != NULL && tableOne[i] != DELETED){
+      insertNoF(tableOne[i]);
+      free(tableOne[i]);
+      tableOne[i] = NULL;
+    }
+  }
+
+  delete(tableOne);
+
+  // make tableOne 4x size of all items to next prime
+  tableOne = new char * [newSize];
+  t1Size = newSize;
+  t1Items = 0;
+  rehashing = false;
+
+  // insert all items in t2 into t1
+  for (int i = 0; i < t2Size; i++){
+    if (tableTwo[i] != NULL && tableTwo[i] != DELETED){
+      /*
+      int tablePos = hashCode(tableTwo[i])%t1Size;
+      while (tableOne[tablePos] != NULL){
+	tablePos = (tablePos+1)%t1Size;
+      }
+      */
+      insertNoF(tableTwo[i]);
+      free(tableTwo[i]);
+    }
+  }
+  delete(tableTwo);
+}
+
+/*
+  This is the overloaded assignment operator for the HashTable class. As with 
+  the copy constructor, the process is fairly standard if the rhs does not have
+  an ongoing incremental rehash. If there is an ongoing rehash, then force the
+  rhs to finish its rehashing and copy over the resulting single hash table.
+ */
+const HashTable& HashTable::operator= (HashTable& rhs){
+  if (rhs.isRehashing()){
+    rhs.giveUp();
+  }
+
+  if (this == &rhs) return *this;
+
+  delete tableOne;
+  tableOne = new char * [rhs.tableSize()];
+  t1Size = rhs.tableSize();
+  t1Items = rhs.size();
+
+  for (int i = 0; i < rhs.tableSize(); i++){
+    if (rhs.tableOne[i] != NULL){
+      if (rhs.tableOne[i] == DELETED){
+	tableOne[i] = DELETED;
+      }
+      else{
+	//	strcpy(tableOne[i],rhs.tableOne[i]);
+	tableOne[i] = rhs.tableOne[i];
+      }
+    }
+    //    tableOne[i] = rhs.tableOne[i];
+  }
+  return *this;
+}
+
+/*
+  This function inserts a copy of the C string str into the hash table. It has
+  no return value. (Note: use strdup() to copy C strings.)
+
+  The insert() function should insert in the new table if there is an ongoing 
+  incremental rehash.
+
+  Calling insert() with a string that is already in the hash table should have 
+  no effect. (I.e., do not insert a second copy of the same value.) Make sure 
+  you don't have a copy of a string that you didn't insert floating around. 
+  That's a memory leak.
+
+  The insert() function should trigger incremental rehashing when appropriate 
+  as described above. The insert() operation should also wrap up the 
+  incremental rehashing if the number of items in the old table drops below 3%.
+ */
+void HashTable::insert(const char *str){
+  if (find(str) == true){
+    return;
+  }
+
+  if (rehashing == true){
+    double t1perc = (double)t1Items/(double)t1Size;
+    // if t1 has less than 3%, force migration of everything from t1 to t2
+    if (t1perc < .03){
+      for (int i = 0; i < t1Size; i++){
+        if (tableOne[i] != NULL && tableOne[i] != DELETED){
+          insertNoF(tableOne[i]);
+	  free(tableOne[i]);
+          tableOne[i] = NULL;
+        }
+      }
+      // copy t2 over t1, delete t2
+      delete(tableOne);
+      tableOne = new char * [t2Size];
+      t1Size = t2Size;
+      t1Items = t2Items;
+      for (int i = 0; i < t1Size; i++){
+        if (tableTwo[i] != NULL){
+          if (tableTwo[i] == DELETED){
+            tableOne[i] = DELETED;
+            tableTwo[i] = NULL;
+          }
+          else{
+	    tableOne[i] = tableTwo[i];
+	    tableTwo[i] = NULL;
+          }
+        }
+      }
+      delete(tableTwo);
+      t2Size = -1;
+      t2Items = -1;
+      rehashing = false;
+      return insertNoF(str);
+    }
+
+    double ans = (double)t2Items/(double)t2Size;
+    if (ans >= .5){
+      // fuck it, migrate everything to third table, clear first two tables
+      // copy third table to first table, clear third table
+      giveUp();
+      return insertNoF(str);
+    }
+
+    int tablePos = hashCode(str)%t2Size;
+    int probing = 1;
+    while (tableTwo[tablePos] != NULL){
+      if (tableTwo[tablePos] == DELETED){
+	break;
+      }
+      tablePos = (tablePos+1)%t2Size;
+      probing = probing +1;
+      if (probing >= 10){
+	giveUp();	
+	return insertNoF(str);
+      }
+    }
+    tableTwo[tablePos] = strdup(str);
+    t2Items = t2Items +1;
+  }
+  else{
+    double ans = (double)t1Items/(double)t1Size;
+    if (ans >= .5){
+      // set rehashing to true
+      rehashing = true;
+      // call func to start rehash
+      startRehash();
+      // call func to insert value into correct place
+      return insertNoF(str);
+    }
+
+    int tablePos = hashCode(str)%t1Size;
+    int probing = 1;
+    while (tableOne[tablePos] != NULL){
+      if (tableOne[tablePos] == DELETED){
+	break;
+      }
+      tablePos = (tablePos+1)%t1Size;
+      probing = probing + 1;
+      if (probing >= 10){
+	// set rehashing to true, recall func + insert whole cluster to t2
+	rehashing = true;
+	startRehash();
+	insertNoF(str);
+
+	// find beginning of cluster
+	while (tableOne[tablePos-1] != NULL){
+	  tablePos = (tablePos-1)%t1Size;
+	}
+
+	// move whole cluster to second table
+	while (tableOne[tablePos] != NULL){
+	  if (tableOne[tablePos] != DELETED){
+	    insertNoF(tableOne[tablePos]);
+	    free(tableOne[tablePos]);
+	  }
+	  tableOne[tablePos] = NULL;
+	  tablePos = (tablePos+1)%t1Size;
+	  t1Items = t1Items-1;
+	}
+      }
+    }
+    if (rehashing == false){
+      tableOne[tablePos] = strdup(str);
+      t1Items = t1Items + 1;
+    }
+  }
+}
+
+/*
+  The find() function looks for str in the hash table. The function returns 
+  true if found, false otherwise. The find() function look in both the old and 
+  the new hash tables if there is an ongoing incremental rehashing.
+
+  The find() function should trigger incremental rehashing when appropriate as 
+  described above. The find() operation should also wrap up the incremental 
+  rehashing if the number of items in the old table drops below 3%.
+ */
+bool HashTable::find(const char *str){
+  if (rehashing == true){
+    double t1perc = (double)t1Items/(double)t1Size;
+    // if t1 has less than 3%, force migration of everything from t1 to t2
+    if (t1perc < .03){
+      for (int i = 0; i < t1Size; i++){
+        if (tableOne[i] != NULL && tableOne[i] != DELETED){
+          insertNoF(tableOne[i]);
+	  free(tableOne[i]);
+          tableOne[i] = NULL;
+        }
+      }
+      // copy t2 over t1, delete t2
+      delete(tableOne);
+      tableOne = new char * [t2Size];
+      t1Size = t2Size;
+      t1Items = t2Items;
+      for (int i = 0; i < t1Size; i++){
+        if (tableTwo[i] != NULL){
+          if (tableTwo[i] == DELETED){
+            tableOne[i] = DELETED;
+            tableTwo[i] = NULL;
+          }
+          else{
+            tableOne[i] = tableTwo[i];
+            tableTwo[i] = NULL;
+          }
+        }
+      }
+      delete(tableTwo);
+      t2Size = -1;
+      t2Items = -1;
+      rehashing = false;
+      return find(str);
+    }
+    double ans = (double)t2Items/(double)t2Size;
+    if (ans >= .5){
+      // fuck it, migrate everything to third table, clear first two tables
+      // copy third table to first table, clear third table
+      giveUp();
+      // call find func again
+      return find(str);
+    }
+    
+    // "search" table one -- if hashes to non-NULL move cluster to tableTwo
+    int t1Pos = hashCode(str)%t1Size;
+    if (tableOne[t1Pos] != NULL){
+      // find beginning of cluster
+      while (tableOne[(t1Pos-1)%t1Size] != NULL){
+	t1Pos = (t1Pos-1)%t1Size;
+      }
+      // move whole cluster to second table
+      while (tableOne[t1Pos] != NULL){
+	if (tableOne[t1Pos] != DELETED){
+	  insertNoF(tableOne[t1Pos]);
+	  free(tableOne[t1Pos]);
+	}
+	tableOne[t1Pos] = NULL;
+	t1Items = t1Items-1;
+	t1Pos = (t1Pos+1)%t1Size;
+      }
+    }
+
+    // search tableTwo
+    int tablePos = hashCode(str)%t2Size;
+    while (tableTwo[tablePos] != NULL){
+      if (tableTwo[tablePos] == DELETED){
+	tablePos = (tablePos+1)%t2Size;
+      }
+      if (strcmp(tableTwo[tablePos], str) == 0){
+	return true;
+      }
+      tablePos = (tablePos+1)%t2Size;
+    }
+    return false;
+  }
+  else{
+    double ans = (double)t1Items/(double)t1Size;
+    if (ans >= .5){
+      rehashing = true;
+      startRehash();
+      // recall func to move found cluster to table two
+      return find(str);
+    }
+    int tablePos = hashCode(str)%t1Size;
+    int probing = 1;
+    while (tableOne[tablePos] != NULL){
+      if (probing >= 10){
+	rehashing = true;
+	startRehash();
+	return find(str);
+      }
+      if (tableOne[tablePos] == DELETED){
+	tablePos = (tablePos+1)%t1Size;
+	probing = probing + 1;
+      }
+      if (strcmp(tableOne[tablePos], str) == 0){
+	return true;
+      }      
+      else{
+	tablePos = (tablePos+1)%t1Size;
+	probing = probing + 1;
+      }
+    }
+    return false;
+  }
+}
+
+/*
+  The remove() function removes str from the hash table and returns the 
+  pointer. If str is not in the hash table, remove() returns NULL.
+
+  It is the responsibility of the code that calls remove() to deallocate the 
+  string that is returned. (Again, use free(), not delete to deallocate.)
+
+  When an item is removed, the slot it occupied should be marked as deleted and
+  not set to NULL, which would break linear probing. 
+  The constant DELETED can then be stored in your hash table slot. This assumes
+  that memory address 1 is never returned by the memory manager. (That's a 
+  pretty safe assumption.)
+
+  The remove() function should trigger incremental rehashing when appropriate 
+  as described above. The remove() operation should also wrap up the 
+  incremental rehashing if the number of items in the old table drops below 3%.
+ */
+char * HashTable::remove (const char *str){
+  if (rehashing == true){
+    double t1perc = (double)t1Items/(double)t1Size;
+    // if t1 has less than 3%, force migration of everything from t1 to t2
+    if (t1perc < .03){
+      for (int i = 0; i < t1Size; i++){
+        if (tableOne[i] != NULL && tableOne[i] != DELETED){
+          insertNoF(tableOne[i]);
+	  free(tableOne[i]);
+	  tableOne[i] = NULL;
+        }
+      }
+      rehashing = false;
+      // copy t2 over t1, delete t2
+      delete tableOne;
+      tableOne = new char * [t2Size];
+      t1Size = t2Size;
+      t1Items = t2Items;
+      for (int i = 0; i < t1Size; i++){
+	if (tableTwo[i] != NULL){
+	  if (tableTwo[i] == DELETED){
+	    tableOne[i] = DELETED;
+	    tableTwo[i] = NULL;
+	  }
+	  else{
+	    tableOne[i] = tableTwo[i];
+	    tableTwo[i] = NULL;
+	  }
+	}
+      }
+      delete tableTwo;
+    }
+
+    double ans = (double)t2Items/(double)t2Size;
+    if (ans >= .5){
+      // fuck it, migrate everything to third table, clear first two tables
+      // copy third table to first table, clear third table
+      giveUp();
+      return remove(str);
+    }
+
+    // "check" tableOne -- migrate any found clusters to tableTwo
+    // "search" table one -- if hashes to non-NULL move cluster to tableTwo
+    int t1Pos = hashCode(str)%t1Size;
+    if (tableOne[t1Pos] != NULL){
+      // find beginning of cluster
+      while (tableOne[t1Pos-1] != NULL){
+        t1Pos = (t1Pos-1)%t1Size;
+      }
+      // move whole cluster to second table
+      while (tableOne[t1Pos] != NULL){
+        if (tableOne[t1Pos] != DELETED){
+          insertNoF(tableOne[t1Pos]);
+	  free(tableOne[t1Pos]);
+        }
+        tableOne[t1Pos] = NULL;
+	t1Items = t1Items-1;
+	t1Pos = (t1Pos+1)%t1Size;
+      }
+    }
+    // remove from tableTwo
+    int tablePos = hashCode(str)%t2Size;
+    while (tableTwo[tablePos] != NULL){
+      if (tableTwo[tablePos] == DELETED){
+	tablePos = (tablePos+1)%t2Size;
+      }
+      if (strcmp(tableTwo[tablePos], str) == 0){
+	char * temp = tableTwo[tablePos];
+	tableTwo[tablePos] = DELETED;
+	if (tableTwo[tablePos+1] == NULL){
+	  tableTwo[tablePos] = NULL;
+	}
+	t2Items = t2Items-1;
+	return temp;
+      }
+      tablePos = (tablePos+1)%t2Size;
+    }
+    return NULL;    
+  }
+  else{
+    double ans = (double)t1Items/(double)t1Size;
+    if (ans >= .5){
+      // set rehashing to true, recall func for second table
+      rehashing = true;
+      startRehash();
+      return remove(str);
+    }
+    int tablePos = hashCode(str)%t1Size;
+    int probing = 1;
+    while (tableOne[tablePos] != NULL){
+      if (probing >= 10){
+	rehashing = true;
+	startRehash();
+	return remove(str);
+      }
+      // if deleted encountered, increase pos by 1 bc next pos guaranteed to 
+      // not be NULL
+      if (tableOne[tablePos] == DELETED){
+	tablePos = (tablePos+1)%t1Size;
+	probing = probing + 1;
+      }
+      if (strcmp(tableOne[tablePos], str) == 0){
+	char * temp = tableOne[tablePos];
+	tableOne[tablePos] = DELETED;
+	// if to the right of deleted is NULL, set deleted to NULL
+	if (tableOne[tablePos+1] == NULL){
+	  tableOne[tablePos] = NULL;
+	}
+	t1Items = t1Items - 1;
+        return temp;
+      }
+      else{
+        tablePos = (tablePos+1)%t1Size;
+	probing = probing + 1;
+      }
+    }
+    return NULL;
+  }
+}
+
+/*
+  The isRehashing() function returns true if there is an ongoing incremental 
+  rehash.
+ */
+bool HashTable::isRehashing(){
+  return rehashing;
+}
+
+/*
+  The tableSize() function returns the size of the hash table. When there is an
+  ongoing rehash, tableSize(0) should return the size of the old table and
+  tableSize(1) should return the size of the new table.
+ */
+int HashTable::tableSize(int table){
+  if (table == 0){
+    return t1Size;
+  }
+  else{
+    return t2Size;
+  }
+}
+
+/*
+  Similarly, size() returns the number of items currently in the table(s).
+ */
+int HashTable::size(int table){
+  if (table == 0){
+    return t1Items;
+  }
+  else{
+    return t2Items;
+  }
+}
+
+/*
+  The at() function returns a pointer to the string stored at the index slot of
+  the hash table specified by table. If the index is invalid (i.e., less than 0
+  or greater than or equal to table size), then at() should throw an 
+  out_of_range exception (already defined in stdexcept). The pointer returned 
+  by at() has type const char * to prevent the string stored in the hash table
+  from being changed. The calling function can make a copy if desired.
+ */
+const char * HashTable::at(int index, int table){
+  if (table == 0){
+    return tableOne[index];
+  }
+  else{
+    return tableTwo[index];
+  }
+}
+
+/* 
+   same as regular insert func but without find included
+ */
+void HashTable::insertNoF(const char *str){
+   if (rehashing == true){
+     /*
+    double ans = (double)t2Items/(double)t2Size;
+    if (ans >= .5){
+      // fuck it, migrate everything to third table, clear first two tables
+      // copy third table to first table, clear third table
+      giveUp();
+      return insertNoF(str);
+    }
+     */
+
+    int tablePos = hashCode(str)%t2Size;
+    int probing = 1;
+    while (tableTwo[tablePos] != NULL){
+      if (tableTwo[tablePos] == DELETED){
+        break;
+      }
+      tablePos = (tablePos+1)%t2Size;
+      probing = probing +1;
+      /*
+      if (probing >= 10){
+        return giveUp();
+      }
+      */
+    }
+    tableTwo[tablePos] = strdup(str);
+    t2Items = t2Items +1;
+  }
+  else{
+    /*
+    double ans = (double)t1Items/(double)t1Size;
+    if (ans >= .5){
+      // set rehashing to true
+      rehashing = true;
+      cout << "NOW REHASHING! -------------------------------11 \n";
+      // call func to start rehash
+      startRehash();
+      // call func to insert value into correct place
+      return insertNoF(str);
+    }
+    */
+
+    int tablePos = hashCode(str)%t1Size;
+    int probing = 1;
+    while (tableOne[tablePos] != NULL){
+      if (tableOne[tablePos] == DELETED){
+        break;
+      }
+      tablePos = (tablePos+1)%t1Size;
+      probing = probing + 1;
+      /*
+      if (probing >= 10){
+      // set rehashing to true, recall func + insert whole cluster to t2
+        rehashing = true;
+	cout << "NOW REHASHING! -------------------------------12 \n";
+        startRehash();
+        insertNoF(str);
+        // find beginning of cluster
+        while (tableOne[tablePos-1] != NULL){
+          tablePos = tablePos-1;
+        }
+        // move whole cluster to second table
+        while (tableOne[tablePos] != NULL){
+          if (tableOne[tablePos] != DELETED){
+            insertNoF(tableOne[tablePos]);
+          }
+          tableOne[tablePos] = NULL;
+          tablePos = tablePos+1;
+          t1Items = t1Items-1;
+        }
+      }
+      */
+    }
+    if (rehashing == false){
+      tableOne[tablePos] = strdup(str);
+      t1Items = t1Items + 1;
+    }
+  }
+}
+
+/*
+  Dump should print some vital statistics and the contents of the hash table(s)
+  to stdout. You should include the table size and number of items in the hash
+  table(s). When you print out the string in each hash slot, include the item's
+  hash index in parentheses.
+ */
+void HashTable::dump(){
+  cout << "HashTable #1: size = " << t1Items << ", tableSize = " << t1Size 
+       << endl;
+  for (int i = 0; i < t1Size; i++){
+    cout << "H1[" << i << "] = ";
+    if (tableOne[i] != NULL){
+      if (tableOne[i] == DELETED){
+	cout << "DELETED" << endl;
+      }
+      else{
+	cout << tableOne[i] << " (" << hashCode(tableOne[i])%t1Size << ")"
+	     << endl;;
+      }
+    }
+    else{
+      cout << endl;
+    }
+  }
+
+  if (rehashing == true){
+    cout << "\nHashTable #2: size = " << t2Items << ", tableSize = " << t2Size
+	 << endl;
+    for (int i = 0; i < t2Size; i++){
+      cout << "H2[" << i << "] = ";
+      if (tableTwo[i] != NULL){
+	if (tableTwo[i] == DELETED){
+	  cout << "DELETED" << endl;
+	}
+	else{
+	  cout << tableTwo[i] << " (" << hashCode(tableTwo[i])%t2Size << ")"
+	       << endl;;
+	}
+      }
+      else{
+	cout << endl;
+      }
+    }
+  }
+}

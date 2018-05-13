@@ -1,0 +1,3 @@
+C++ implementation of a forth interpreter. I believe most code was previously provided and we needed to add support for new symbols. 
+All functions added for this are shown in Sally.h at the bottom of the file under comment "// added funcs".
+Functions implemented in Sally.cpp.

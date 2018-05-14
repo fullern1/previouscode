@@ -1,0 +1,3 @@
+I wasn't able to get the year values into the asm function to compare the years
+correctly. Compare by title works and will sort alphabetically (ascending or
+descending depending on if the two jumps are switched).

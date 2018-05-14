@@ -1,0 +1,730 @@
+Script started on Wed 16 Nov 2016 06:25:52 PM EST
+[fullern1@linux3 proj6]make
+cc -m32 -g -ansi -Wall   -c -o main6.o main6.c
+cc -m32 -g -ansi -Wall   -c -o frac_heap.o frac_heap.c
+gcc -m32 main6.o frac_heap.o -o main6.out
+[fullern1@linux3 proj6]./main6.out 
+called malloc() (60): returned 0x8b14008
+-2/3 plus 1/4 = -5/12
+**** BEGIN HEAP DUMP ****
+
+0x8b1402c
+0x8b14038
+
+***** END HEAP DUMP *****
+
+called malloc() (60): returned 0x8b14048
+**** BEGIN HEAP DUMP ****
+
+0x8b14054
+0x8b14060
+0x8b1406c
+0x8b14078
+
+***** END HEAP DUMP *****
+
+[fullern1@linux3 proj6]emacs Makefile
+[?1049h[?1049h[?12;25h[?1h=[H[2J[50d[?25l[7m-=--:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A[H[?12l[?25h[?12;25h[H[2J[51d[K[?1l>[?12l[?25h[?1049l[39;49m[?1049h[?1049h[?12;25h[?1h=[51;1H[?25lLoading /usr/share/emacs/site-lisp/site-start.d/auctex.el (source)...[K[H
+[?12l[?25h[?12;25h[51;70H[?25ldone[H
+[?12l[?25h[?12;25h[51;49H[?25lfocus-init.el (source)...[H
+[?12l[?25h[?12;25h[51;74H[?25ldone[H
+[?12l[?25h[?12;25h[51;49H[?25lphp-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[51d[?25le[K[H[7mFile Edit Options Buffers Tools Help                                            [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/php-mode-init.el (source)...don\
+[A[2d[?12l[?25h[?12;25h[51d[K[50;50H[?25lo-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[50;76H[?25ldone[H
+[?12l[?25h[?12;25h[50;50H[?25lreview-latex.el (source)...[K[H
+[?12l[?25h[?12;25h[51d[?25le[50;77Hdon\
+[2d[?12l[?25h[?12;25h[51d[?25l..[50;49Hrpm-spec-mode-init.el (source).[H
+[?12l[?25h[?12;25h[51;3H[?25ldone[H
+[?12l[?25h[?12;25h[51d[K[50;52H[?25ldev-init.el (source)...[K[H
+[?12l[?25h[?12;25h[50;75H[?25ldone[H
+[?12l[?25h[?12;25h[>0c[51d[K[H[?25l[7mFile Edit Options Buffers Tools Lisp-Interaction Help                           [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Lisp Interaction)-----------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/rpmdev-init.el (source)...done[K[H
+[?12l[?25h[?12;25h[1;50r[49;1H[1L[1;51r[51;1H[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[49;1H[K[2d[?12l[?25h[?12;25h[51d[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[K[H[7mFile Edit Options Buffers Tools Makefile Help                                   [0m[39;49m[27m
+[A
+[33mCFLAGS[0m[39;49m=-m32 -g -ansi -Wall[K
+[K
+[1m[34mmain6.out[0m[39;49m: main6.o frac_heap.o[K
+        gcc -m32 $[35m^[39;49m -o [1m[34m$[0m[39;49m[1m[35m@[0m[39;49m[K
+[K
+[1m[34mclean[0m[39;49m:[K
+        rm -f *.o *.out *.lst[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UU-:----F1  [0m[39;49m[27m[7m[1mMakefile    [0m[39;49m[27m[7m   All L1     (GNUmakefile)----------------------------[0m[39;49m[27m
+[A[2d[?12l[?25h[?12;25h[51d[K[50;34H[?25l[7m2[0m[39;49m[27m[H
+
+[?12l[?25h[?12;25h[50;34H[?25l[7m3[0m[39;49m[27m[4;1H[?12l[?25h[?12;25h[C[C[C[C[C[C		[C[C[C[C[C[C		[?25l[1P[50;6H[7m**[0m[39;49m[27m[4;16H[?12l[?25h[?12;25h[?25l[1P[?12l[?25h[?12;25h[?25l[1P[?12l[?25h[?12;25h[?25l[1P[?12l[?25h[?12;25h[?25l[1P[?12l[?25h[?12;25h[?25l[1@t[?12l[?25h[?12;25h[?25l[1@e[?12l[?25h[?12;25h[?25l[1@s[?12l[?25h[?12;25h[?25l[1@t[?12l[?25h[?12;25h[?25l[1@1[?12l[?25h[?12;25h[51;1H[?25lSaving file /afs/umbc.edu/users/f/u/fullern1/home/313/proj6/Makefile...[4;17H[?12l[?25h[?12;25h[51;1H[?25lWrote /afs/umbc.edu/users/f/u/fullern1/home/313/proj6/Makefile[K[4;17H[?12l[?25h[?12;25h[50;6H[?25l[7m--[0m[39;49m[27m[4;17H[?12l[?25h[?12;25h[51;1H[K[4;17H[51;1H[?25l(No files need saving)[4;17H[?12l[?25h[?12;25h[51;1H[K[?1l>[?12l[?25h[?1049l[39;49m[fullern1@linux3 proj6]make
+cc -m32 -g -ansi -Wall   -c -o test1.o test1.c
+gcc -m32 test1.o frac_heap.o -o main6.out
+[fullern1@linux3 proj6]./main6.out 
+**** BEGIN HEAP DUMP ****
+
+Free list is empty.
+
+***** END HEAP DUMP *****
+
+called malloc() (60): returned 0x9ee6008
+**** BEGIN HEAP DUMP ****
+
+0x9ee6014
+0x9ee6020
+0x9ee602c
+0x9ee6038
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x9ee6020
+0x9ee602c
+0x9ee6038
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x9ee602c
+0x9ee6038
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x9ee6038
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+Free list is empty.
+
+***** END HEAP DUMP *****
+
+
+Frac 1: 1/1
+Frac 2: -2/2
+Frac 3: 3/3
+Frac 4: -4/4
+Frac 5: 5/5
+[fullern1@linux3 proj6]./main6.out[24Gmake[Kemacs Makefile
+[?1049h[?1049h[?12;25h[?1h=[H[2J[50d[?25l[7m-=--:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A[H[?12l[?25h[?12;25h[H[2J[51d[K[?1l>[?12l[?25h[?1049l[39;49m[?1049h[?1049h[?12;25h[?1h=[51;1H[?25lLoading /usr/share/emacs/site-lisp/site-start.d/auctex.el (source)...[K[H
+[?12l[?25h[?12;25h[51;70H[?25ldone[H
+[?12l[?25h[?12;25h[51;49H[?25lfocus-init.el (source)...[H
+[?12l[?25h[?12;25h[51;74H[?25ldone[H
+[?12l[?25h[?12;25h[51;49H[?25lphp-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[51d[?25le[K[H[7mFile Edit Options Buffers Tools Help                                            [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/php-mode-init.el (source)...don\
+[A[2d[?12l[?25h[?12;25h[51d[K[50;50H[?25lo-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[50;76H[?25ldone[H
+[?12l[?25h[?12;25h[50;50H[?25lreview-latex.el (source)...[K[H
+[?12l[?25h[?12;25h[51d[?25le[50;77Hdon\
+[2d[?12l[?25h[?12;25h[51d[?25l..[50;49Hrpm-spec-mode-init.el (source).[H
+[?12l[?25h[?12;25h[51;3H[?25ldone[H
+[?12l[?25h[?12;25h[51d[K[50;52H[?25ldev-init.el (source)...[K[H
+[?12l[?25h[?12;25h[50;75H[?25ldone[H
+[?12l[?25h[?12;25h[>0c[51d[K[H[?25l[7mFile Edit Options Buffers Tools Lisp-Interaction Help                           [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Lisp Interaction)-----------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/rpmdev-init.el (source)...done[K[H
+[?12l[?25h[?12;25h[1;50r[49;1H[1L[1;51r[51;1H[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[49;1H[K[2d[?12l[?25h[?12;25h[51d[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[K[H[7mFile Edit Options Buffers Tools Makefile Help                                   [0m[39;49m[27m
+[A
+[33mCFLAGS[0m[39;49m=-m32 -g -ansi -Wall[K
+[K
+[1m[34mmain6.out[0m[39;49m: test1.o frac_heap.o[K
+        gcc -m32 $[35m^[39;49m -o [1m[34m$[0m[39;49m[1m[35m@[0m[39;49m[K
+[K
+[1m[34mclean[0m[39;49m:[K
+        rm -f *.o *.out *.lst[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UU-:----F1  [0m[39;49m[27m[7m[1mMakefile    [0m[39;49m[27m[7m   All L1     (GNUmakefile)----------------------------[0m[39;49m[27m
+[A[2d[?12l[?25h[?12;25h[51d[K[50;34H[?25l[7m2[0m[39;49m[27m[H
+
+[?12l[?25h[?12;25h[50;34H[?25l[7m3[0m[39;49m[27m[4;1H[?12l[?25h[?12;25h[C[C[C[C[C[C		[C[C[C[C[C[C		[?25l[1P[50;6H[7m**[0m[39;49m[27m[4;16H[?12l[?25h[?12;25h[?25l[1@2[?12l[?25h[?12;25h[51;1H[?25lSaving file /afs/umbc.edu/users/f/u/fullern1/home/313/proj6/Makefile...[4;17H[?12l[?25h[?12;25h[51;1H[?25lWrote /afs/umbc.edu/users/f/u/fullern1/home/313/proj6/Makefile[K[4;17H[?12l[?25h[?12;25h[50;6H[?25l[7m--[0m[39;49m[27m[4;17H[?12l[?25h[?12;25h[51;1H[K[4;17H[51;1H[?25l(No files need saving)[4;17H[?12l[?25h[?12;25h[51;1H[K[?1l>[?12l[?25h[?1049l[39;49m[fullern1@linux3 proj6]make
+cc -m32 -g -ansi -Wall   -c -o test2.o test2.c
+gcc -m32 test2.o frac_heap.o -o main6.out
+[fullern1@linux3 proj6]./main6.out 
+called malloc() (60): returned 0x9ef0008
+**** BEGIN HEAP DUMP ****
+
+Free list is empty.
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x9ef0038
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x9ef0038
+0x9ef0044
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x9ef0038
+0x9ef0044
+0x9ef0050
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x9ef0038
+0x9ef0044
+0x9ef0050
+0x9ef005c
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x9ef0038
+0x9ef0044
+0x9ef0050
+0x9ef005c
+0x9ef0068
+
+***** END HEAP DUMP *****
+
+[fullern1@linux3 proj6]./main6.out[24Gmake[Kemacs Makefile
+[?1049h[?1049h[?12;25h[?1h=[H[2J[50d[?25l[7m-=--:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A[H[?12l[?25h[?12;25h[H[2J[51d[K[?1l>[?12l[?25h[?1049l[39;49m[?1049h[?1049h[?12;25h[?1h=[51;1H[?25lLoading /usr/share/emacs/site-lisp/site-start.d/auctex.el (source)...[K[H
+[?12l[?25h[?12;25h[51;70H[?25ldone[H
+[?12l[?25h[?12;25h[51;49H[?25lfocus-init.el (source)...[H
+[?12l[?25h[?12;25h[51;74H[?25ldone[H
+[?12l[?25h[?12;25h[51;49H[?25lphp-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[51d[?25le[K[H[7mFile Edit Options Buffers Tools Help                                            [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/php-mode-init.el (source)...don\
+[A[2d[?12l[?25h[?12;25h[51d[K[50;50H[?25lo-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[50;76H[?25ldone[H
+[?12l[?25h[?12;25h[50;50H[?25lreview-latex.el (source)...[K[H
+[?12l[?25h[?12;25h[51d[?25le[50;77Hdon\
+[2d[?12l[?25h[?12;25h[51d[?25l..[50;49Hrpm-spec-mode-init.el (source).[H
+[?12l[?25h[?12;25h[51;3H[?25ldone[H
+[?12l[?25h[?12;25h[51d[K[50;52H[?25ldev-init.el (source)...[K[H
+[?12l[?25h[?12;25h[50;75H[?25ldone[H
+[?12l[?25h[?12;25h[>0c[51d[K[H[?25l[7mFile Edit Options Buffers Tools Lisp-Interaction Help                           [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Lisp Interaction)-----------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/rpmdev-init.el (source)...done[K[H
+[?12l[?25h[?12;25h[1;50r[49;1H[1L[1;51r[51;1H[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[49;1H[K[2d[?12l[?25h[?12;25h[51d[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[K[H[7mFile Edit Options Buffers Tools Makefile Help                                   [0m[39;49m[27m
+[A
+[33mCFLAGS[0m[39;49m=-m32 -g -ansi -Wall[K
+[K
+[1m[34mmain6.out[0m[39;49m: test2.o frac_heap.o[K
+        gcc -m32 $[35m^[39;49m -o [1m[34m$[0m[39;49m[1m[35m@[0m[39;49m[K
+[K
+[1m[34mclean[0m[39;49m:[K
+        rm -f *.o *.out *.lst[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UU-:----F1  [0m[39;49m[27m[7m[1mMakefile    [0m[39;49m[27m[7m   All L1     (GNUmakefile)----------------------------[0m[39;49m[27m
+[A[2d[?12l[?25h[?12;25h[51d[K[50;34H[?25l[7m2[0m[39;49m[27m[H
+
+[?12l[?25h[?12;25h[50;34H[?25l[7m3[0m[39;49m[27m[4;1H[?12l[?25h[?12;25h[C[C[C[C[C[C		[C[C[C[C[C[C		[?25l[1P[50;6H[7m**[0m[39;49m[27m[4;16H[?12l[?25h[?12;25h[?25l[1@3[?12l[?25h[?12;25h[51;1H[?25lSaving file /afs/umbc.edu/users/f/u/fullern1/home/313/proj6/Makefile...[4;17H[?12l[?25h[?12;25h[51;1H[?25lWrote /afs/umbc.edu/users/f/u/fullern1/home/313/proj6/Makefile[K[4;17H[?12l[?25h[?12;25h[50;6H[?25l[7m--[0m[39;49m[27m[4;17H[?12l[?25h[?12;25h[51;1H[K[4;17H[51;1H[?25l(No files need saving)[4;17H[?12l[?25h[?12;25h[51;1H[K[?1l>[?12l[?25h[?1049l[39;49m[fullern1@linux3 proj6]make
+cc -m32 -g -ansi -Wall   -c -o test3.o test3.c
+gcc -m32 test3.o frac_heap.o -o main6.out
+[fullern1@linux3 proj6]./main6.out 
+called malloc() (60): returned 0x933e008
+**** BEGIN HEAP DUMP ****
+
+Free list is empty.
+
+***** END HEAP DUMP *****
+
+called malloc() (60): returned 0x933e048
+**** BEGIN HEAP DUMP ****
+
+0x933e054
+0x933e060
+0x933e06c
+0x933e078
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x933e054
+0x933e060
+0x933e06c
+0x933e078
+0x933e084
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x933e054
+0x933e060
+0x933e06c
+0x933e078
+0x933e084
+0x933e090
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x933e054
+0x933e060
+0x933e06c
+0x933e078
+0x933e084
+0x933e090
+0x933e09c
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x933e054
+0x933e060
+0x933e06c
+0x933e078
+0x933e084
+0x933e090
+0x933e09c
+0x933e0a8
+
+***** END HEAP DUMP *****
+
+**** BEGIN HEAP DUMP ****
+
+0x933e054
+0x933e060
+0x933e06c
+0x933e078
+0x933e084
+0x933e090
+0x933e09c
+0x933e0a8
+0x933e0b4
+
+***** END HEAP DUMP *****
+
+[fullern1@linux3 proj6]exit
+exit
+
+Script done on Wed 16 Nov 2016 06:26:31 PM EST

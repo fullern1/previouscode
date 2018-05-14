@@ -1,0 +1,277 @@
+Script started on Thu 03 Nov 2016 05:35:23 PM EDT
+[fullern1@linux1 proj4]cat text.txt
+I wasn't able to get the year values into the asm function to compare the years
+correctly. Compare by title works and will sort alphabetically (ascending or
+descending depending on if the two jumps are switched).
+
+First run is sorting by title only. Second run is with non functioning year
+sort. 
+[fullern1@linux1 proj4]make
+nasm -f elf -g -l bookcmp.lst bookcmp.asm -o bookcmp.o
+cc -m32 -g -Wall -ansi sort_books.o bookcmp.o -o sort_books.out
+[fullern1@linux1 proj4]./sort_books.out < books.dat
+1225 Christmas Tree Lane, Debbie Macomber, Romance, 2011
+1491, Charles C. Mann, Nonfiction, 2006
+15 Seconds, Andrew Gross, Thriller, 2012
+1Q84, Haruki Murakami, Fiction, 2011
+A Summer Affair, Elin Hilderbrand, Romance, 2008
+Best Staged Plans, Claire Cook, Fiction, 2011
+Between the Dark and the Dayligh, Richard Marsh, Mystery, 2012
+Black Dahlia & White Rose, Joyce Carol Oates, Fiction, 2012
+Breaking Point, Pamela Clare, Romance, 2011
+Crossed, Ally Condie, Romance, 2011
+Dead until Dark, Charlaine Harris, Fantasy, 2001
+Eclipse, Stephenie Meyer, Romance, 2007
+Explosive Eighteen, Janet Evanovich, Mystery, 2011
+Glad Tidings, Debbie Macomber, Romance, 2012
+Good Girls Don't, Victoria Dahl, Romance, 2011
+Harry Potter and the Chamber of , J.K. Rowling, Fantasy, 2012
+Heaven is for Real, Todd Burpo, Nonfiction, 2011
+Inheritance, Christopher Paolini, Fantasy, 2011
+Murder on Astor Place, Victoria Thompson, Mystery, 2009
+New Moon, Stephenie Meyer, Romance, 2007
+The 10 Habits of Happy Mothers, Meg Meeker; M.D., Nonfiction, 2011
+The Affair, Lee Child, Mystery, 2011
+The Affair Next Door, Anna Katherine Green, Mystery, 2012
+The Gap Year, Sarah Bird, Humor, 2011
+The Girl With the Dragon Tattoo, Stieg Larsson, Mystery, 2011
+The Help, Kathryn Stockett, Fiction, 2009
+The Prague Cemetery, Umberto Eco, Fiction, 2011
+The Third Gate, Lincoln Child, Fantasy, 2012
+Three Weeks with My Brother, Nicholas Sparks, Nonfiction, 2004
+Vow, Kim Carpenter, Nonfiction, 2012
+We Need to Talk About Kevin, Lionel Shriver, Fiction, 2011
+[fullern1@linux1 proj4]emacs bookcmp.asm
+[?1049h[?1049h[?12;25h[?1h=[H[2J[50d[?25l[7m-=--:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A[H[?12l[?25h[?12;25h[H[2J[51d[K[?1l>[?12l[?25h[?1049l[39;49m[?1049h[?1049h[?12;25h[?1h=[51;1H[?25lLoading /usr/share/emacs/site-lisp/site-start.d/auctex.el (source)...[K[H
+[?12l[?25h[?12;25h[51;70H[?25ldone[H
+[?12l[?25h[?12;25h[51;49H[?25lfocus-init.el (source)...[H
+[?12l[?25h[?12;25h[51;74H[?25ldone[H
+[?12l[?25h[?12;25h[51;49H[?25lphp-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[51d[?25le[K[H[7mFile Edit Options Buffers Tools Help                                            [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/php-mode-init.el (source)...don\
+[A[2d[?12l[?25h[?12;25h[51d[K[50;50H[?25lo-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[50;76H[?25ldone[H
+[?12l[?25h[?12;25h[50;50H[?25lreview-latex.el (source)...[K[H
+[?12l[?25h[?12;25h[51d[?25le[50;77Hdon\
+[2d[?12l[?25h[?12;25h[51d[?25l..[50;49Hrpm-spec-mode-init.el (source).[H
+[?12l[?25h[?12;25h[51;3H[?25ldone[H
+[?12l[?25h[?12;25h[51d[K[50;52H[?25ldev-init.el (source)...[K[H
+[?12l[?25h[?12;25h[50;75H[?25ldone[H
+[?12l[?25h[?12;25h[>0c[51d[K[H[?25l[7mFile Edit Options Buffers Tools Lisp-Interaction Help                           [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Lisp Interaction)-----------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/rpmdev-init.el (source)...done[K[H
+[?12l[?25h[?12;25h[1;50r[49;1H[1L[1;51r[51;1H[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[49;1H[K[2d[?12l[?25h[?12;25h[51d[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[K[H[7mFile Edit Options Buffers Tools Asm Help                                        [0m[39;49m[27m
+[A
+        [31m;; Nathaniel Fuller                                                     [39;49m
+[A
+        [31m;; bookcmp.asm                                                          [39;49m
+[A
+        [31m;; Project 4                                                            [39;49m
+[A
+[1m[34mglobal[0m[39;49m [1m[36mbookcmp[0m[39;49m[K
+[1m[34mextern[0m[39;49m [1m[36mbook1[0m[39;49m[K
+[1m[34mextern[0m[39;49m [1m[36mbook2[0m[39;49m[K
+[K
+[1m[34m%define[0m[39;49m [1m[36mTITLE[0m[39;49m_OFFSET 0[K
+[1m[34m%define[0m[39;49m [1m[36mAUTHOR[0m[39;49m_OFFSET 21[K
+[1m[34m%define[0m[39;49m [1m[36mSUBJECT[0m[39;49m_OFFSET 36[K
+[1m[34m%define[0m[39;49m [1m[36mYEAR[0m[39;49m_OFFSET 44[K
+[K
+[SECTION .data][K
+[K
+[SECTION .text][K
+[K
+[1m[34mbookcmp[0m[39;49m:[K
+        [1m[36mpush[0m[39;49m ebx                [31m; save registers used just in case              [39;49m
+[A
+        [1m[36mpush[0m[39;49m ecx[K
+        [1m[36mpush[0m[39;49m edx[K
+        [1m[36mpush[0m[39;49m edi[K
+[K
+        [1m[36mmov[0m[39;49m ebx, [book1]        [31m; book1 pointer                                 [39;49m
+[A
+        [1m[36mmov[0m[39;49m ecx, [book2]        [31m; book2 pointer                                 [39;49m
+[A
+        [1m[36mmov[0m[39;49m edi, 0              [31m; counter to increment                          [39;49m
+[A
+        [1m[36mmov[0m[39;49m eax, 0[K
+        [1m[36mmov[0m[39;49m edx, 0[K
+        [1m[36mjmp[0m[39;49m .nameLoop[K
+        [1m[36mmov[0m[39;49m eax, [ebx+YEAR_OFFSET] [31m; move book1 year to eax                     [39;49m
+[A
+        [1m[36mmov[0m[39;49m edx, [ecx+YEAR_OFFSET] [31m; move book2 year to edx                     [39;49m
+[A
+[K
+        [1m[36mcmp[0m[39;49m eax, edx            [31m; compare to see which is bigger                [39;49m
+[A
+        [1m[36mjg[0m[39;49m .greater             [31m; if greater jump to .greater and return 1      [39;49m
+[A
+        [1m[36mjl[0m[39;49m .less                [31m; if less jump to .less and return -1           [39;49m
+[A
+        [1m[36mjmp[0m[39;49m .cmpName            [31m; book years are equal, cmp name                [39;49m
+[A
+[K
+[1m[34m.cmpName[0m[39;49m:[K
+        [1m[36mmov[0m[39;49m edi, 0              [31m; reset counter to 0                            [39;49m
+[A
+[1m[34m.nameLoop[0m[39;49m:[K
+        [1m[36mmov[0m[39;49m ah, [ebx+edi+TITLE_OFFSET][K
+        [1m[36mmov[0m[39;49m dh, [ecx+edi+TITLE_OFFSET][K
+[K
+        [1m[36mcmp[0m[39;49m ah, dh              [31m; check if equal                                [39;49m
+[A
+        [1m[36mje[0m[39;49m .nullNameCheck       [31m; if so check if null                           [39;49m
+[A
+[K
+        [1m[36mcmp[0m[39;49m ah, 0H              [31m; Check if reached end of book1 title           [39;49m
+[A
+        [1m[36mje[0m[39;49m .less                [31m; if so book 1 is less                          [39;49m
+[A
+        [1m[36mcmp[0m[39;49m dh, 0H              [31m; Check if reached end of book2 title           [39;49m
+[A
+[7m-UU-:----F1  [0m[39;49m[27m[7m[1mbookcmp.asm [0m[39;49m[27m[7m   Top L1     (Assembler)------------------------------[0m[39;49m[27m
+[A[2d[?12l[?25h[?12;25h[51d[K[50;34H[?25l[7m2[0m[39;49m[27m[H
+
+[?12l[?25h[?12;25h[50;34H[?25l[7m3[0m[39;49m[27m[4;1H[?12l[?25h[?12;25h[50;34H[?25l[7m4[0m[39;49m[27m[5;1H[?12l[?25h[?12;25h[50;34H[?25l[7m5[0m[39;49m[27m[6;1H[?12l[?25h[?12;25h[50;34H[?25l[7m6[0m[39;49m[27m[7;1H[?12l[?25h[?12;25h[50;34H[?25l[7m7[0m[39;49m[27m[8;1H[?12l[?25h[?12;25h[50;34H[?25l[7m8[0m[39;49m[27m[9;1H[?12l[?25h[?12;25h[50;34H[?25l[7m9[0m[39;49m[27m[10;1H[?12l[?25h[?12;25h[50;34H[?25l[7m10[0m[39;49m[27m[11;1H[?12l[?25h[?12;25h[50;35H[?25l[7m1[0m[39;49m[27m[12;1H[?12l[?25h[?12;25h[50;35H[?25l[7m2[0m[39;49m[27m[13;1H[?12l[?25h[?12;25h[50;35H[?25l[7m3[0m[39;49m[27m[14;1H[?12l[?25h[?12;25h[50;35H[?25l[7m4[0m[39;49m[27m[15;1H[?12l[?25h[?12;25h[50;35H[?25l[7m5[0m[39;49m[27m[16;1H[?12l[?25h[?12;25h[50;35H[?25l[7m6[0m[39;49m[27m[17;1H[?12l[?25h[?12;25h[50;35H[?25l[7m7[0m[39;49m[27m[18;1H[?12l[?25h[?12;25h[50;35H[?25l[7m8[0m[39;49m[27m[19;1H[?12l[?25h[?12;25h[50;35H[?25l[7m9[0m[39;49m[27m[20;1H[?12l[?25h[?12;25h[50;34H[?25l[7m20[0m[39;49m[27m[21;1H[?12l[?25h[?12;25h[50;35H[?25l[7m1[0m[39;49m[27m[22;1H[?12l[?25h[?12;25h[50;35H[?25l[7m2[0m[39;49m[27m[23;1H[?12l[?25h[?12;25h[50;35H[?25l[7m3[0m[39;49m[27m[24;1H[?12l[?25h[?12;25h[50;35H[?25l[7m4[0m[39;49m[27m[25;1H[?12l[?25h[?12;25h[50;35H[?25l[7m5[0m[39;49m[27m[26;1H[?12l[?25h[?12;25h[50;35H[?25l[7m6[0m[39;49m[27m[27;1H[?12l[?25h[?12;25h[50;35H[?25l[7m7[0m[39;49m[27m[28;1H[?12l[?25h[?12;25h[50;35H[?25l[7m8[0m[39;49m[27m[29;1H[?12l[?25h[?12;25h[1;49r[29;1H[1L[1;51r[29;1H[K[50;6H[?25l[7m**--F1  [0m[39;49m[27m[7m[1mbookcmp.asm [0m[39;49m[27m[7m   Top L29[0m[39;49m[27m[30;9H[?12l[?25h[?12;25h[50;35H[?25l[7m8[0m[39;49m[27m[29;1H[?12l[?25h[?12;25h	[?25l[31m;;                                                                      [39;49m
+[29;12H[?12l[?25h[?12;25h[8P[C[C[?25l[8@[31m;       [39;49m[?12l[?25h[?12;25h[?25l[31m [39;49m[?12l[?25h[?12;25h[50;35H[?25l[7m9[0m[39;49m[27m[30;1H[?12l[?25h[?12;25h[1;49r[31;1H[1M[1;51r[29;9H[?25l[31mjmp .nameLoop[39;49m
+	[1m[36mmov[0m[39;49m eax, [ebx+YEAR_OFFSET] [31m; move book1 year to eax                     [39;49m
+[49d        [1m[36mcmp[0m[39;49m dh, 0H              [31m; Check if reached end of book2 title           [39;49m
+[A[50;35H[7m8[0m[39;49m[27m[29;3H[?12l[?25h[?12;25h[51;1H[?25lSaving file /afs/umbc.edu/users/f/u/fullern1/home/313/proj4/bookcmp.asm...[29;3H[?12l[?25h[?12;25h[51;1H[?25lWrote /afs/umbc.edu/users/f/u/fullern1/home/313/proj4/bookcmp.asm[K[29;3H[?12l[?25h[?12;25h[50;6H[?25l[7m--[0m[39;49m[27m[29;3H[?12l[?25h[?12;25h[51;1H[K[29;3H[51;1H[?25l(No files need saving)[29;3H[?12l[?25h[?12;25h[51;1H[K[?1l>[?12l[?25h[?1049l[39;49m[fullern1@linux1 proj4]make
+nasm -f elf -g -l bookcmp.lst bookcmp.asm -o bookcmp.o
+cc -m32 -g -Wall -ansi sort_books.o bookcmp.o -o sort_books.out
+[fullern1@linux1 proj4]./sort_books.out < books.dat
+Best Staged Plans, Claire Cook, Fiction, 2011
+Crossed, Ally Condie, Romance, 2011
+Heaven is for Real, Todd Burpo, Nonfiction, 2011
+The Affair, Lee Child, Mystery, 2011
+The Gap Year, Sarah Bird, Humor, 2011
+The Prague Cemetery, Umberto Eco, Fiction, 2011
+Breaking Point, Pamela Clare, Romance, 2011
+Harry Potter and the Chamber of , J.K. Rowling, Fantasy, 2012
+15 Seconds, Andrew Gross, Thriller, 2012
+The Third Gate, Lincoln Child, Fantasy, 2012
+Between the Dark and the Dayligh, Richard Marsh, Mystery, 2012
+Good Girls Don't, Victoria Dahl, Romance, 2011
+The Girl With the Dragon Tattoo, Stieg Larsson, Mystery, 2011
+Vow, Kim Carpenter, Nonfiction, 2012
+We Need to Talk About Kevin, Lionel Shriver, Fiction, 2011
+The Affair Next Door, Anna Katherine Green, Mystery, 2012
+The 10 Habits of Happy Mothers, Meg Meeker; M.D., Nonfiction, 2011
+Explosive Eighteen, Janet Evanovich, Mystery, 2011
+1Q84, Haruki Murakami, Fiction, 2011
+Dead until Dark, Charlaine Harris, Fantasy, 2001
+A Summer Affair, Elin Hilderbrand, Romance, 2008
+1491, Charles C. Mann, Nonfiction, 2006
+Inheritance, Christopher Paolini, Fantasy, 2011
+1225 Christmas Tree Lane, Debbie Macomber, Romance, 2011
+Glad Tidings, Debbie Macomber, Romance, 2012
+Eclipse, Stephenie Meyer, Romance, 2007
+New Moon, Stephenie Meyer, Romance, 2007
+Three Weeks with My Brother, Nicholas Sparks, Nonfiction, 2004
+Murder on Astor Place, Victoria Thompson, Mystery, 2009
+Black Dahlia & White Rose, Joyce Carol Oates, Fiction, 2012
+The Help, Kathryn Stockett, Fiction, 2009
+[fullern1@linux1 proj4]exit
+exit
+
+Script done on Thu 03 Nov 2016 05:36:21 PM EDT

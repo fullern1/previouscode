@@ -1,0 +1,239 @@
+;;; Executable name: countchars.out
+;;; Name: Nathaniel Fuller
+;;; CMSC 313
+;;; Project 1
+;;; Compiled with:
+;;; nasm -f elf -g -F stabs countchars.asm
+;;; ld -e _start -m elf_i386 -o countchars.out countchars.o
+
+;;; toUpper code used as base
+%define STDIN 0
+%define STDOUT 1
+%define STDERR 2
+%define SYSCALL_EXIT  1
+%define SYSCALL_READ  3
+%define SYSCALL_WRITE 4
+%define BUFLEN 256
+
+[SECTION .data]
+;;; Here we declare initialized data. For example: messages, prompts,
+;;; and numbers that we know in advance
+
+msg1:	   db "Text to be analyzed: "	; user prompt
+len1:	   equ $-msg1		; length of first message
+
+msg2:	   db "You entered: " ; original string label
+len2:	   equ $-msg2		  ; length of second message
+
+msg3:	   db "There were "
+len3:	   equ $-msg3
+
+msg4:	   db " alphabetic characters. There were "
+len4:	   equ $-msg4
+
+msg5:	   db " numeric characters.", 0x0a, "There were "
+len5:	   equ $-msg5
+
+msg6:	   db " other characters.", 0x0a
+len6:	   equ $-msg6
+
+int2char:	db 0		;used to help print out register counts
+	
+[SECTION .bss]
+;;; Here we declare uninitialized data. We're reserving space (and
+;;; potentially associating names with that space) that our code
+;;; will use as it executes. Think of these as "global variables"
+
+buf:	 resb BUFLEN		; buffer for read
+readlen:	 resb 4		; storage for the length of string we read
+
+	
+[SECTION .text]
+
+global _start			; make start global so ld can find it
+
+_start:				; the program actually starts here
+;;;  prompt for user input
+	mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, msg1
+	mov edx, len1
+	int 80H
+
+;;;  read user input
+	mov eax, SYSCALL_READ
+	mov ebx, STDIN
+	mov ecx, buf
+	mov edx, BUFLEN
+	int 80H
+
+;;;  remember how many characters we read
+	mov [readlen], eax
+
+;;;  loop over all characters
+	mov esi, buf
+
+;;; TESTING
+;;; Simple work around to ignore an always present new line char at the end of
+;;; the input string
+;;; 	dec eax
+
+;;; Loop through until last char is reached. Compare char to 0AH. If equal
+;;; decrease eax by 1 so 0AH char not included in count.
+;;; Currently: Seems to work
+;;; Problems: none found yet
+	xor edx, edx
+.lastchar:
+ 	cmp eax, 1
+ 	je .compare
+ 	add esi, 1
+ 	sub eax, 1
+	add edx, 1
+ 	jmp .lastchar
+
+.compare:
+ 	mov bh, [esi]
+ 	cmp bh, 0AH
+ 	je .remove
+ 	jmp .cont1
+
+.remove:
+ 	add eax, edx
+ 	mov esi, buf
+ 	sub eax, 1
+ 	jmp .cont2
+
+.cont1:
+ 	add eax, edx
+ 	mov esi, buf
+	xor edx, edx
+	
+.cont2:
+;;; TESTING
+
+ 	mov edi, 0
+ 	mov esp, 0
+ 	mov ebp, 0
+	
+.loop:
+	cmp eax, 0
+	je .done
+
+;;;  grab the next letter
+	mov bh, [esi]
+
+;;; values below 30H, above 7AH and between intermediate values belong to other
+;;;  check for numbers (hex ASCII values 30-39)
+	cmp bh, 30H
+	jl .other
+	cmp bh, 39H
+	jle .number
+
+;;; check for letters (hex ASCII values 41 - 5A and 61 - 7A)
+	cmp bh, 41H
+	jl .other
+	cmp bh, 5AH
+	jle .alpha
+	cmp bh, 61H
+	jl .other
+	cmp bh, 7AH
+	jle .alpha
+
+;;; if none of above values jump to .other
+	jmp .other
+	
+.other:
+;;;  increment other value by 1 and jump back to loop
+	inc edi
+	add esi, 1
+	sub eax, 1
+	jmp .loop
+
+.alpha:
+;;;  increment alpha value by 1 and jump back to loop
+	inc esp
+	add esi, 1
+	sub eax, 1
+	jmp .loop
+
+.number:
+;;;  increment number value by 1 and jump back to loop
+	inc ebp
+	add esi, 1
+	sub eax, 1
+	jmp .loop
+	
+.done:
+;;;  print the original string message
+	mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, msg2
+	mov edx, len2
+	int 80H
+
+	mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, buf
+	mov edx, [readlen]
+	int 80H
+
+;;;  print message informing # of each type
+	mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, msg3
+	mov edx, len3
+	int 80H
+
+	add esp, 48
+	mov [int2char], esp
+	mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, int2char
+	mov edx, 4
+	int 80H
+	;; alpha number goes above
+
+        mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, msg4
+	mov edx, len4
+	int 80H
+
+	add ebp, 48
+	mov [int2char], ebp
+	mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, int2char
+	mov edx, 4
+	int 80H
+	;; numeric number goes above
+	
+        mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, msg5
+	mov edx, len5
+	int 80H
+
+	add edi, 48
+	mov [int2char], edi
+	mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, int2char
+	mov edx, 4
+	int 80H
+	;; other number goes above
+	
+	mov eax, SYSCALL_WRITE
+	mov ebx, STDOUT
+	mov ecx, msg6
+	mov edx, len6
+	int 80H
+	
+;;;  and we're done!
+	jmp .end
+
+.end:
+;;;  call sys_exit to finish things off
+	mov eax, SYSCALL_EXIT ; sys_exit syscall
+	mov ebx, 0	      ; no error
+	int 80H		      ; kernel interrupt

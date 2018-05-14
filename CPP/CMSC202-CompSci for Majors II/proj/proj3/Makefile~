@@ -1,0 +1,2 @@
+proj3: Edge.cpp Matrix.cpp Vertex.cpp proj3.cpp
+	g++ -Wall -ansi Edge.cpp Matrix.cpp Vertex.cpp proj3.cpp -o proj3

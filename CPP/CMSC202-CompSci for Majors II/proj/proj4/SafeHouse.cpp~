@@ -1,0 +1,28 @@
+//safehouse.cpp
+
+#include <iostream>
+#include <sstream>
+#include "SafeHouse.h"
+
+using namespace std;
+
+SafeHouse::SafeHouse()
+  : WalkVertex(){
+  /* Empty constructor body */
+}
+
+SafeHouse::SafeHouse(string description)
+  : WalkVertex(description){
+  /* Empty constructor body */
+}
+
+string SafeHouse::ToString() const{
+  stringstream ss;
+  ss << "ID " << GetID() << ": SafeHouse (" << m_description << ")";
+  return ss.str();
+}
+
+walk_status_t SafeHouse::Status() const{
+  //Always return SUCCESS for SafeHouse object
+  return SUCCESS;
+}

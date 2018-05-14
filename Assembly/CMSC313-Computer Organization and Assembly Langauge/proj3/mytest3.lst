@@ -1,0 +1,138 @@
+     1                                  %define STDIN 0
+     2                                  %define STDOUT 1
+     3                                  %define SYSCALL_EXIT  1
+     4                                  %define SYSCALL_READ  3
+     5                                  %define SYSCALL_WRITE 4
+     6                                  
+     7                                  
+     8                                  [SECTION .data]
+     9                                  
+    10 00000000 0A                      lf:	db 10 			; line feed
+    11                                  
+    12 00000001 20706C757320            msg1:	 db " plus "
+    13                                  len1 equ $-msg1
+    14                                  
+    15 00000007 206D696E757320          msg2:	db " minus "
+    16                                  len2 equ $-msg2
+    17                                  
+    18 0000000E 20657175616C7320        msg3:	db " equals "
+    19                                  len3 equ $-msg3
+    20                                  
+    21                                  [SECTION .text]
+    22                                  
+    23                                  global _start
+    24                                  extern prt_dec
+    25                                  
+    26                                  _start:
+    27 00000000 BBB11C0000              	mov     ebx, 7345
+    28 00000005 BAC1000000              	mov     edx, 00193
+    29 0000000A BF5C2A1200              	mov     edi, 1190492
+    30 0000000F BDE9FB8B06              	mov     ebp, 109837289
+    31                                  
+    32 00000014 682FB3FA00              	push    dword 0xFAB32F
+    33 00000019 E8(00000000)            	call    prt_dec
+    34 0000001E 81C404000000            	add     esp, 4
+    35 00000024 E83C010000              	call    prt_lf
+    36                                  
+    37 00000029 68FFFFFFFF              	push    dword 0xFFFFFFFF
+    38 0000002E E8(00000000)            	call    prt_dec
+    39 00000033 81C404000000            	add     esp, 4
+    40 00000039 E827010000              	call    prt_lf
+    41                                  
+    42 0000003E 689F143400              	push    3413151
+    43 00000043 E8(00000000)            	call    prt_dec
+    44 00000048 81C404000000            	add     esp, 4
+    45 0000004E E812010000              	call    prt_lf
+    46                                  
+    47 00000053 53                      	push    ebx
+    48 00000054 E8(00000000)            	call    prt_dec
+    49 00000059 81C404000000            	add     esp, 4
+    50 0000005F E801010000              	call    prt_lf
+    51                                  
+    52 00000064 52                      	push    edx
+    53 00000065 E8(00000000)            	call    prt_dec
+    54 0000006A 81C404000000            	add     esp, 4
+    55 00000070 E8F0000000              	call    prt_lf
+    56                                  
+    57 00000075 57                      	push    edi
+    58 00000076 E8(00000000)            	call    prt_dec
+    59 0000007B 81C404000000            	add     esp, 4
+    60 00000081 E8DF000000              	call    prt_lf
+    61                                  
+    62 00000086 55                      	push    ebp
+    63 00000087 E8(00000000)            	call    prt_dec
+    64 0000008C 81C404000000            	add     esp, 4
+    65 00000092 E8CE000000              	call    prt_lf
+    66                                  
+    67 00000097 6802000000              	push    2
+    68 0000009C E8(00000000)            	call    prt_dec
+    69 000000A1 81C404000000            	add     esp, 4
+    70                                  
+    71 000000A7 B804000000              	mov     eax, SYSCALL_WRITE ; write message
+    72 000000AC BB01000000              	mov     ebx, STDOUT
+    73 000000B1 B9[01000000]            	mov     ecx, msg1
+    74 000000B6 BA06000000              	mov     edx, len1
+    75 000000BB CD80                    	int     080h
+    76                                  
+    77 000000BD 6803000000              	push    3
+    78 000000C2 E8(00000000)            	call    prt_dec
+    79 000000C7 81C404000000            	add     esp, 4
+    80                                  
+    81 000000CD B804000000              	mov     eax, SYSCALL_WRITE ; write message
+    82 000000D2 BB01000000              	mov     ebx, STDOUT
+    83 000000D7 B9[0E000000]            	mov     ecx, msg3
+    84 000000DC BA08000000              	mov     edx, len3
+    85 000000E1 CD80                    	int     080h
+    86                                  
+    87 000000E3 6805000000              	push    5
+    88 000000E8 E8(00000000)            	call    prt_dec
+    89 000000ED 81C404000000            	add     esp, 4
+    90 000000F3 E86D000000              	call    prt_lf
+    91                                  
+    92 000000F8 6807000000              	push    7
+    93 000000FD E8(00000000)            	call    prt_dec
+    94 00000102 81C404000000                    add     esp, 4
+    95                                  
+    96 00000108 B804000000              	mov     eax, SYSCALL_WRITE ; write message
+    97 0000010D BB01000000              	mov     ebx, STDOUT
+    98 00000112 B9[07000000]            	mov     ecx, msg2
+    99 00000117 BA07000000              	mov     edx, len2
+   100 0000011C CD80                    	int     080h
+   101                                  	
+   102 0000011E 6804000000              	push    4
+   103 00000123 E8(00000000)            	call    prt_dec
+   104 00000128 81C404000000            	add     esp, 4
+   105                                  
+   106 0000012E B804000000              	mov     eax, SYSCALL_WRITE ; write message
+   107 00000133 BB01000000              	mov     ebx, STDOUT
+   108 00000138 B9[0E000000]            	mov     ecx, msg3
+   109 0000013D BA08000000              	mov     edx, len3
+   110 00000142 CD80                    	int     080h
+   111                                  	
+   112 00000144 6803000000              	push    3
+   113 00000149 E8(00000000)            	call    prt_dec
+   114 0000014E 81C404000000            	add     esp, 4
+   115 00000154 E80C000000              	call    prt_lf
+   116                                  	
+   117                                  exit:	
+   118 00000159 B801000000              	mov eax, SYSCALL_EXIT
+   119 0000015E BB00000000              	mov ebx, 0
+   120 00000163 CD80                    	int 80H
+   121                                  
+   122                                  prt_lf:
+   123 00000165 50                      	push eax
+   124 00000166 53                      	push ebx
+   125 00000167 51                      	push ecx
+   126 00000168 52                      	push edx
+   127                                  
+   128 00000169 B804000000              	mov eax, SYSCALL_WRITE
+   129 0000016E BB01000000              	mov ebx, STDOUT
+   130 00000173 B9[00000000]            	mov ecx, lf
+   131 00000178 BA01000000              	mov edx, 1
+   132 0000017D CD80                    	int 80H
+   133                                  
+   134 0000017F 5A                      	pop edx
+   135 00000180 59                      	pop ecx
+   136 00000181 5B                      	pop ebx
+   137 00000182 58                      	pop eax
+   138 00000183 C3                      	ret 

@@ -1,0 +1,577 @@
+Script started on Fri 11 Nov 2016 06:59:03 PM EST
+[fullern1@linux3 proj5]make
+cc -m32 -g -ansi -Wall   -c -o main5.o main5.c
+gcc -m32 main5.o frac_heap.o -o main5.out
+[fullern1@linux3 proj5]./main5.out 
+-2/3 plus 1/4 = -5/12
+**** BEGIN HEAP DUMP****
+First free = 3
+0: -1 2 3
+1: 1 1 4
+2: -1 5 12
+3: 0 0 4
+4: 0 0 5
+5: 0 0 6
+6: 0 0 7
+7: 0 0 8
+8: 0 0 9
+9: 0 0 10
+10: 0 0 11
+11: 0 0 12
+12: 0 0 13
+13: 0 0 14
+14: 0 0 15
+15: 0 0 16
+16: 0 0 17
+17: 0 0 18
+18: 0 0 19
+19: 0 0 -1
+**** END HEAP DUMP ****
+
+**** BEGIN HEAP DUMP****
+First free = 1
+0: -1 2 3
+1: 0 0 0
+2: -1 5 12
+3: 0 0 4
+4: 0 0 5
+5: 0 0 6
+6: 0 0 7
+7: 0 0 8
+8: 0 0 9
+9: 0 0 10
+10: 0 0 11
+11: 0 0 12
+12: 0 0 13
+13: 0 0 14
+14: 0 0 15
+15: 0 0 16
+16: 0 0 17
+17: 0 0 18
+18: 0 0 19
+19: 0 0 -1
+**** END HEAP DUMP ****
+
+**** BEGIN HEAP DUMP****
+First free = 5
+0: -1 2 3
+1: 1 8 42
+2: -1 5 12
+3: 1 17 96
+4: 1 247 672
+5: 0 0 6
+6: 0 0 7
+7: 0 0 8
+8: 0 0 9
+9: 0 0 10
+10: 0 0 11
+11: 0 0 12
+12: 0 0 13
+13: 0 0 14
+14: 0 0 15
+15: 0 0 16
+16: 0 0 17
+17: 0 0 18
+18: 0 0 19
+19: 0 0 -1
+**** END HEAP DUMP ****
+
+[fullern1@linux3 proj5]emacs Makefile
+[?1049h[?1049h[?12;25h[?1h=[H[2J[48d[?25l[7m-=--:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A[H[?12l[?25h[?12;25h[H[2J[49d[K[?1l>[?12l[?25h[?1049l[39;49m[?1049h[?1049h[?12;25h[?1h=[49;1H[?25lLoading /usr/share/emacs/site-lisp/site-start.d/auctex.el (source)...[K[H
+[?12l[?25h[?12;25h[49;70H[?25ldone[H
+[?12l[?25h[?12;25h[49;49H[?25lfocus-init.el (source)...[H
+[?12l[?25h[?12;25h[49;74H[?25ldone[H
+[?12l[?25h[?12;25h[49;49H[?25lphp-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[49d[?25le[K[H[7mFile Edit Options Buffers Tools Help                                            [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/php-mode-init.el (source)...don\
+[A[2d[?12l[?25h[?12;25h[49d[K[48;50H[?25lo-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[48;76H[?25ldone[H
+[?12l[?25h[?12;25h[48;50H[?25lreview-latex.el (source)...[K[H
+[?12l[?25h[?12;25h[49d[?25le[48;77Hdon\
+[2d[?12l[?25h[?12;25h[49d[?25l..[48;49Hrpm-spec-mode-init.el (source).[H
+[?12l[?25h[?12;25h[49;3H[?25ldone[H
+[?12l[?25h[?12;25h[49d[K[48;52H[?25ldev-init.el (source)...[K[H
+[?12l[?25h[?12;25h[48;75H[?25ldone[H
+[?12l[?25h[?12;25h[>0c[49d[K[H[?25l[7mFile Edit Options Buffers Tools Lisp-Interaction Help                           [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Lisp Interaction)-----------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/rpmdev-init.el (source)...done[K[H
+[?12l[?25h[?12;25h[1;48r[47;1H[1L[1;49r[49;1H[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[47;1H[K[2d[?12l[?25h[?12;25h[49d[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[K[H[7mFile Edit Options Buffers Tools Makefile Help                                   [0m[39;49m[27m
+[A
+[33mCFLAGS[0m[39;49m=-m32 -g -ansi -Wall[K
+[K
+[1m[34mmain5.out[0m[39;49m: main5.o frac_heap.o[K
+        gcc -m32 $[35m^[39;49m -o [1m[34m$[0m[39;49m[1m[35m@[0m[39;49m[K
+[K
+[1m[34mclean[0m[39;49m:[K
+        rm -f *.o *.out *.lst[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UU-:----F1  [0m[39;49m[27m[7m[1mMakefile    [0m[39;49m[27m[7m   All L1     (GNUmakefile)----------------------------[0m[39;49m[27m
+[A[2d[?12l[?25h[?12;25h[49d[K[48;34H[?25l[7m2[0m[39;49m[27m[H
+
+[?12l[?25h[?12;25h[48;34H[?25l[7m3[0m[39;49m[27m[4;1H[?12l[?25h[?12;25h[C[C[C[C[C[C		[C[C[C[C[C[C		[?25l[1P[48;6H[7m**[0m[39;49m[27m[4;16H[?12l[?25h[?12;25h[?25l[1P[?12l[?25h[?12;25h[?25l[1P[?12l[?25h[?12;25h[?25l[1P[?12l[?25h[?12;25h[?25l[1P[?12l[?25h[?12;25h[?25l[1@t[?12l[?25h[?12;25h[?25l[1@e[?12l[?25h[?12;25h[?25l[1@s[?12l[?25h[?12;25h[?25l[1@t[?12l[?25h[?12;25h[?25l[1@1[?12l[?25h[?12;25h[49;1H[?25lSaving file /afs/umbc.edu/users/f/u/fullern1/home/313/proj5/Makefile...[4;17H[?12l[?25h[?12;25h[49;1H[?25lWrote /afs/umbc.edu/users/f/u/fullern1/home/313/proj5/Makefile[K[4;17H[?12l[?25h[?12;25h[48;6H[?25l[7m--[0m[39;49m[27m[4;17H[?12l[?25h[?12;25h[49;1H[K[4;17H[49;1H[?25l(No files need saving)[4;17H[?12l[?25h[?12;25h[49;1H[K[?1l>[?12l[?25h[?1049l[39;49m[fullern1@linux3 proj5]emacs test1.c
+[?1049h[?1049h[?12;25h[?1h=[H[2J[48d[?25l[7m-=--:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A[H[?12l[?25h[?12;25h[H[2J[49d[K[?1l>[?12l[?25h[?1049l[39;49m[?1049h[?1049h[?12;25h[?1h=[49;1H[?25lLoading /usr/share/emacs/site-lisp/site-start.d/auctex.el (source)...[K[H
+[?12l[?25h[?12;25h[49;70H[?25ldone[H
+[?12l[?25h[?12;25h[49;49H[?25lfocus-init.el (source)...[H
+[?12l[?25h[?12;25h[49;74H[?25ldone[H
+[?12l[?25h[?12;25h[49;49H[?25lphp-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[49d[?25le[K[H[7mFile Edit Options Buffers Tools Help                                            [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Fundamental)----------------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/php-mode-init.el (source)...don\
+[A[2d[?12l[?25h[?12;25h[49d[K[48;50H[?25lo-mode-init.el (source)...[K[H
+[?12l[?25h[?12;25h[48;76H[?25ldone[H
+[?12l[?25h[?12;25h[48;50H[?25lreview-latex.el (source)...[K[H
+[?12l[?25h[?12;25h[49d[?25le[48;77Hdon\
+[2d[?12l[?25h[?12;25h[49d[?25l..[48;49Hrpm-spec-mode-init.el (source).[H
+[?12l[?25h[?12;25h[49;3H[?25ldone[H
+[?12l[?25h[?12;25h[49d[K[48;52H[?25ldev-init.el (source)...[K[H
+[?12l[?25h[?12;25h[48;75H[?25ldone[H
+[?12l[?25h[?12;25h[>0c[49d[K[H[?25l[7mFile Edit Options Buffers Tools Lisp-Interaction Help                           [0m[39;49m[27m
+[A
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[7m-UUU:----F1  [0m[39;49m[27m[7m[1m*scratch*   [0m[39;49m[27m[7m   All L1     (Lisp Interaction)-----------------------[0m[39;49m[27m
+[A
+Loading /usr/share/emacs/site-lisp/site-start.d/rpmdev-init.el (source)...done[K[H
+[?12l[?25h[?12;25h[1;48r[47;1H[1L[1;49r[49;1H[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[47;1H[K[2d[?12l[?25h[?12;25h[49d[?25lFor information about GNU Emacs and the GNU system, type C-h C-a.[K[H[7mFile Edit Options Buffers Tools C Help                                          [0m[39;49m[27m
+[A
+[31m/*                                                                              [39;49m
+[A
+[31m *  File: test1.c                                                               [39;49m
+[A
+[31m *                                                                              [39;49m
+[A
+[31m *  This file tests out the functions in frac_heap.c                            [39;49m
+[A
+[31m */[39;49m[K
+[K
+[1m[34m#include[0m[39;49m [32m<stdio.h>[39;49m[K
+[1m[34m#include[0m[39;49m [32m<stdlib.h>[39;49m[K
+[1m[34m#include[0m[39;49m [32m"frac_heap.h"[39;49m[K
+[K
+[31m/*                                                                              [39;49m
+[A
+[31m * Compute the greatest common divisor using Euclid's algorithm                 [39;49m
+[A
+[31m */[39;49m[K
+[32munsigned[39;49m [32mint[39;49m [1m[34mgcd[0m[39;49m ( [32munsigned[39;49m [32mint[39;49m [33ma[0m[39;49m, [32munsigned[39;49m [32mint[39;49m [33mb[0m[39;49m) {[K
+[K
+  [1m[36mif[0m[39;49m (b == 0) [1m[36mreturn[0m[39;49m a ;[K
+[K
+  [1m[36mreturn[0m[39;49m gcd (b, a % b) ;[K
+}[K
+[K
+[31m/*                                                                              [39;49m
+[A
+[31m * Print a fraction out nicely                                                  [39;49m
+[A
+[31m */[39;49m[K
+[32mvoid[39;49m [1m[34mprint_frac[0m[39;49m ([32mfraction[39;49m *[33mfptr[0m[39;49m) {[K
+[K
+  [1m[36mif[0m[39;49m (fptr->sign < 0) printf([32m"-"[39;49m) ;[K
+[K
+  printf([32m"%d/%d"[39;49m, fptr->numerator, fptr->denominator) ;[K
+[K
+}[K
+[K
+[31m/*                                                                              [39;49m
+[A
+[31m * Initialize a fraction                                                        [39;49m
+[A
+[31m */[39;49m[K
+[32mfraction[39;49m *[1m[34minit_frac[0m[39;49m ([32msigned[39;49m [32mchar[39;49m [33ms[0m[39;49m, [32munsigned[39;49m [32mint[39;49m [33mn[0m[39;49m, [32munsigned[39;49m [32mint[39;49m [33md[0m[39;49m) {[K
+[K
+  [32mfraction[39;49m *[33mfp[0m[39;49m ;[K
+[K
+  fp = new_frac() ;[K
+  fp->sign = s ;[K
+  fp->numerator = n ;[K
+  fp->denominator = d ;[K
+[K
+  [1m[36mreturn[0m[39;49m fp ;[K
+}[K
+[K
+[7m-UU-:----F1  [0m[39;49m[27m[7m[1mtest1.c     [0m[39;49m[27m[7m   Top L1     (C/l Abbrev)-----------------------------[0m[39;49m[27m
+[A[2d[?12l[?25h[?12;25h[1;47r[2;1H[1L[1;49r[49;1H[K[2d[K[48;6H[?25l[7m**--F1  [0m[39;49m[27m[7m[1mtest1.c     [0m[39;49m[27m[7m   Top L2[0m[39;49m[27m[H
+
+[?12l[?25h[?12;25h[1;47r[2;1H[1M[1;49r[47;1H[K[48;34H[?25l[7m1[0m[39;49m[27m[H
+[?12l[?25h[?12;25h[49d[?25lSaving file /afs/umbc.edu/users/f/u/fullern1/home/313/proj5/test1.c...[H
+[?12l[?25h[?12;25h[49d[?25lWrote /afs/umbc.edu/users/f/u/fullern1/home/313/proj5/test1.c[K[H
+[?12l[?25h[?12;25h[48;6H[?25l[7m--[0m[39;49m[27m[H
+[?12l[?25h[?12;25h[49d[K[2d[49d[?25l(No files need saving)[H
+[?12l[?25h[?12;25h[49d[K[?1l>[?12l[?25h[?1049l[39;49m[fullern1@linux3 proj5]make
+cc -m32 -g -ansi -Wall   -c -o test1.o test1.c
+gcc -m32 test1.o frac_heap.o -o main5.out
+[fullern1@linux3 proj5]./main5.out 
+**** BEGIN HEAP DUMP****
+First free = 3
+0: -1 2 3
+1: 1 1 4
+2: -1 5 12
+3: 0 0 4
+4: 0 0 5
+5: 0 0 6
+6: 0 0 7
+7: 0 0 8
+8: 0 0 9
+9: 0 0 10
+10: 0 0 11
+11: 0 0 12
+12: 0 0 13
+13: 0 0 14
+14: 0 0 15
+15: 0 0 16
+16: 0 0 17
+17: 0 0 18
+18: 0 0 19
+19: 0 0 -1
+**** END HEAP DUMP ****
+
+**** BEGIN HEAP DUMP****
+First free = 3
+0: 1 1 1
+1: 2 2 2
+2: -3 3 3
+3: 0 0 4
+4: 0 0 5
+5: 0 0 6
+6: 0 0 7
+7: 0 0 8
+8: 0 0 9
+9: 0 0 10
+10: 0 0 11
+11: 0 0 12
+12: 0 0 13
+13: 0 0 14
+14: 0 0 15
+15: 0 0 16
+16: 0 0 17
+17: 0 0 18
+18: 0 0 19
+19: 0 0 -1
+**** END HEAP DUMP ****
+
+**** BEGIN HEAP DUMP****
+First free = 11
+0: 1 1 1
+1: 2 2 2
+2: -3 3 3
+3: 1 8 42
+4: 1 17 96
+5: 1 247 672
+6: -1 38 19
+7: 1 10 98
+8: 1 82 2
+9: 1 155 6
+10: 1 2014 49
+11: 0 0 12
+12: 0 0 13
+13: 0 0 14
+14: 0 0 15
+15: 0 0 16
+16: 0 0 17
+17: 0 0 18
+18: 0 0 19
+19: 0 0 -1
+**** END HEAP DUMP ****
+
+**** BEGIN HEAP DUMP****
+0: 1 1 1
+1: 2 2 2
+2: -3 3 3
+3: 1 8 42
+4: 1 17 96
+5: 1 247 672
+6: -1 38 19
+7: 1 10 98
+8: 1 82 2
+9: 1 155 6
+10: 1 2014 49
+11: 1 2209 4704
+12: 1 2209 4704
+13: 1 6913 4704
+14: -1 1 1
+15: 1 507 784
+16: 2 2 1
+17: 1 11617 4704
+18: 1 6913 2352
+19: 1 1093 42
+**** END HEAP DUMP ****
+
+**** BEGIN HEAP DUMP****
+First free = 1
+0: 1 1 1
+1: 0 0 0
+2: -3 3 3
+3: 1 8 42
+4: 1 17 96
+5: 1 247 672
+6: -1 38 19
+7: 1 10 98
+8: 1 82 2
+9: 1 155 6
+10: 1 2014 49
+11: 1 2209 4704
+12: 1 2209 4704
+13: 1 6913 4704
+14: -1 1 1
+15: 1 507 784
+16: 2 2 1
+17: 0 0 0
+18: 1 6913 2352
+19: 1 1093 42
+**** END HEAP DUMP ****
+
+**** BEGIN HEAP DUMP****
+0: 1 1 1
+1: 2 2 2
+2: -3 3 3
+3: 1 8 42
+4: 1 17 96
+5: 1 247 672
+6: -1 38 19
+7: 1 10 98
+8: 1 82 2
+9: 1 155 6
+10: 1 2014 49
+11: 1 2209 4704
+12: 1 2209 4704
+13: 1 6913 4704
+14: -1 1 1
+15: 1 507 784
+16: 2 2 1
+17: 18 18 18
+18: 1 6913 2352
+19: 1 1093 42
+**** END HEAP DUMP ****
+
+Error: No space available. Cannot create new fraction.
+Exiting program.
+[fullern1@linux3 proj5]exit
+exit
+
+Script done on Fri 11 Nov 2016 06:59:43 PM EST

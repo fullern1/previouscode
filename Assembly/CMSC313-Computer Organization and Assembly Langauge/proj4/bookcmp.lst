@@ -1,0 +1,88 @@
+     1                                  	;; Nathaniel Fuller
+     2                                  	;; bookcmp.asm
+     3                                  	;; Project 4
+     4                                  global bookcmp
+     5                                  extern book1
+     6                                  extern book2
+     7                                  
+     8                                  %define TITLE_OFFSET 0
+     9                                  %define AUTHOR_OFFSET 21
+    10                                  %define SUBJECT_OFFSET 36
+    11                                  %define YEAR_OFFSET 44
+    12                                  	
+    13                                  [SECTION .data]
+    14                                  
+    15                                  [SECTION .text]
+    16                                  
+    17                                  bookcmp:
+    18 00000000 53                      	push ebx		; save registers used just in case
+    19 00000001 51                      	push ecx
+    20 00000002 52                      	push edx
+    21 00000003 57                      	push edi
+    22                                  	
+    23 00000004 8B1D[00000000]          	mov ebx, [book1]	; book1 pointer
+    24 0000000A 8B0D[00000000]          	mov ecx, [book2]	; book2 pointer
+    25 00000010 BF00000000              	mov edi, 0		; counter to increment
+    26 00000015 B800000000              	mov eax, 0
+    27 0000001A BA00000000              	mov edx, 0
+    28                                  ;;	jmp .nameLoop
+    29 0000001F 8B432C                  	mov eax, [ebx+YEAR_OFFSET] ; move book1 year to eax
+    30 00000022 8B512C                  	mov edx, [ecx+YEAR_OFFSET] ; move book2 year to edx
+    31                                  
+    32 00000025 39D0                    	cmp eax, edx		; compare to see which is bigger
+    33 00000027 7F4B                    	jg .greater		; if greater jump to .greater and return 1
+    34 00000029 7C53                    	jl .less		; if less jump to .less and return -1
+    35 0000002B E900000000              	jmp .cmpName		; book years are equal, cmp name
+    36                                  
+    37                                  .cmpName:
+    38 00000030 BF00000000              	mov edi, 0 		; reset counter to 0
+    39                                  .nameLoop:
+    40 00000035 8A243B                  	mov ah, [ebx+edi+TITLE_OFFSET]
+    41 00000038 8A3439                  	mov dh, [ecx+edi+TITLE_OFFSET]
+    42                                  
+    43 0000003B 38F4                    	cmp ah, dh		; check if equal
+    44 0000003D 741B                    	je .nullNameCheck 	; if so check if null
+    45                                  
+    46 0000003F 80FC00                  	cmp ah, 0H		; Check if reached end of book1 title
+    47 00000042 743A                    	je .less		; if so book 1 is less
+    48 00000044 80FE00                  	cmp dh, 0H		; Check if reached end of book2 title
+    49 00000047 742B                    	je .greater		; if so book 2 is less
+    50                                  
+    51 00000049 38F4                    	cmp ah, dh
+    52 0000004B 7F27                    	jg .greater
+    53 0000004D 7C2F                    	jl .less
+    54 0000004F 81C701000000            	add edi, 1
+    55 00000055 E9DBFFFFFF              	jmp .nameLoop 		; continue till one is greater or equal to 0H
+    56                                  	
+    57                                  .nullNameCheck:
+    58 0000005A 80FC00                  	cmp ah, 0H
+    59 0000005D 740B                    	je .equal
+    60 0000005F 81C701000000            	add edi, 1
+    61 00000065 E9CBFFFFFF              	jmp .nameLoop
+    62                                  
+    63                                  .equal:
+    64 0000006A B800000000              	mov eax, 0		; values equal, move 0 to eax
+    65                                  
+    66 0000006F 5F                      	pop edi			; return previous values to registers
+    67 00000070 5A                      	pop edx
+    68 00000071 59                      	pop ecx
+    69 00000072 5B                      	pop ebx
+    70 00000073 C3                      	ret			; return
+    71                                  	
+    72                                  .greater:
+    73 00000074 B801000000              	mov eax, 1		; book2 greater, move 1 to eax
+    74                                  	
+    75 00000079 5F                      	pop edi
+    76 0000007A 5A                      	pop edx
+    77 0000007B 59                      	pop ecx
+    78 0000007C 5B                      	pop ebx
+    79 0000007D C3                      	ret
+    80                                  
+    81                                  .less:
+    82 0000007E B8FFFFFFFF              	mov eax, -1		; book 1 greater, move -1 to eax
+    83                                  
+    84 00000083 5F                      	pop edi
+    85 00000084 5A                      	pop edx
+    86 00000085 59                      	pop ecx
+    87 00000086 5B                      	pop ebx
+    88 00000087 C3                      	ret

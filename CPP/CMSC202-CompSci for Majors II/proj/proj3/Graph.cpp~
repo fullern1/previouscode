@@ -1,0 +1,125 @@
+#include <cstdlib>
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include "Graph.h"
+#include "Vertex.h"
+#include "Edge.h"
+
+using namespace std;
+
+Graph::Graph()
+{ /* nothing to do */ }
+
+Graph::Graph(vector<Vertex *> vertices, vector<Edge *> edges) :
+  m_vertices(vertices), m_edges(edges)
+{
+  for (unsigned int i = 0; i < vertices.size(); i++)
+    if (vertices[i] == NULL) {
+      cerr << "Error: Graph constructor expects non-null vertices." << endl;
+      exit(1);
+    }
+  
+  for (unsigned int i = 0; i < edges.size(); i++)
+    if (edges[i]->GetV1() == NULL || edges[i]->GetV2() == NULL) {
+      cerr << "Error: Graph constructor expects edges with non-null vertices." << endl;
+      exit(1);
+    }
+}      
+
+bool Graph::LoadFromFile(string fileName) {
+  int numVertices;
+  int v1, v2;
+  vector<Vertex*> vertices;
+  vector<Edge*> edges;
+  ifstream dataFile;
+      
+  /* Set exception flags for file input stream */ 
+
+  dataFile.exceptions(ios::failbit | ios::badbit);
+
+  try {
+  
+    dataFile.open(fileName.c_str());
+    dataFile >> numVertices;
+
+    for ( int i = 0; i < numVertices; i++ )
+      vertices.push_back( new Vertex() );
+
+    dataFile >> v1 >> v2;
+  
+    while ( v1 > 0 && v2 > 0 ) {
+      if (v1 <= numVertices && v2 <= numVertices )
+	edges.push_back( new Edge(vertices[v1-1], vertices[v2-1]) );
+      dataFile >> v1 >> v2;
+    }
+
+    dataFile.close();
+  }
+  catch (exception e) {
+    return false;
+  }
+
+  m_vertices = vertices;
+  m_edges = edges;
+
+  return true;
+}
+
+//Returns int value of amount of vertices
+int Graph::GetNumVertices() const{
+  return m_vertices.size();
+}
+
+//Returns int value of amount of edges
+int Graph::GetNumEdges() const{
+  return m_edges.size();
+}
+
+//Returns vector of vertex pointers
+vector<Vertex *> Graph::GetVertices() const{
+  return m_vertices;
+}
+
+//Returns vector of edge pointers
+vector<Edge *> Graph::GetEdges() const{
+  return m_edges;
+}
+/*
+Matrix Graph::GetAdjacencyMatrix() const{
+  Matrix adjacency(m_vertices.size(), m_vertices.size());
+  for (unsigned int i = 0; i < m_vertices.size(); i++){
+    adjacency.Set(i, i, 1);
+  }
+  for (unsigned int i = 0; i < m_edges.size(); i++){
+    eOne = m_edges[i]->GetV1();
+    eTwo = m_edges[i]->Getv2();
+    adjacency.Set(eOne-1, eTwo-1, 1);
+    adjacency.Set(eTwo-1, eOne-1, 1);
+  }
+  return adjacency;
+}
+*/
+
+vector<Vertex *> Graph::GetConnectedComponent(Vertex *v) const{
+  vertexID = v.GetID();
+  vector<Vertex *> connected;
+
+  for (unsigned int i = 0; i < m_edges.size(); i++){
+    if (m_edges[i]->GetV1()->GetID() == vertexID){
+      if (connected[0] != m_edges[i]->GetV1()){
+	connected.push_back(m_edges[i]->GetV1());
+      }
+      connected.push_back(m_edges[i]->GetV2());
+    }
+    if (m_edges[i]->GetV2()->GetID() == vertexID){
+      if (connected[0] != m_edges[i]->GetV2()){
+	connected.push_back(m_edges[i]->GetV2());
+      }
+      connected.push_back(m_edges[i]->GetV1());
+    }
+  }
+
+  return connected;
+}  
+

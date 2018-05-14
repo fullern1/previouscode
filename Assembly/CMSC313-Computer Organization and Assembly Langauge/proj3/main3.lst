@@ -1,0 +1,150 @@
+     1                                  ;  File: main.asm
+     2                                  ;
+     3                                  ;  main program that exercises the prt_dec subroutine
+     4                                  ;
+     5                                  
+     6                                  %define STDIN 0
+     7                                  %define STDOUT 1
+     8                                  %define SYSCALL_EXIT  1
+     9                                  %define SYSCALL_READ  3
+    10                                  %define SYSCALL_WRITE 4
+    11                                  
+    12                                  
+    13                                          SECTION .data	; initialized data section
+    14                                  
+    15 00000000 0A                      lf:	db  10		; just a linefeed
+    16                                  
+    17 00000001 20706C757320            msg1:	db " plus "
+    18                                  len1 equ $ - msg1
+    19                                  
+    20 00000007 206D696E757320          msg2:	db " minus "
+    21                                  len2 equ $ - msg2
+    22                                  
+    23 0000000E 20657175616C7320        msg3:	db " equals "
+    24                                  len3 equ $ - msg3
+    25                                  
+    26                                          SECTION .text	; Code section.
+    27                                          global  _start	; let loader see entry point
+    28                                          extern  prt_dec
+    29                                  
+    30                                  _start:
+    31 00000000 BB11000000              	mov     ebx, 17
+    32 00000005 BA6B440300              	mov     edx, 214123
+    33 0000000A BF61278384              	mov     edi, 2223187809
+    34 0000000F BD7CB9B75C              	mov     ebp, 1555544444
+    35                                  
+    36                                  
+    37                                  	
+    38 00000014 6800000000              	push    dword 0x0
+    39 00000019 E8(00000000)            	call    prt_dec
+    40 0000001E 81C404000000            	add     esp, 4
+    41 00000024 E83C010000              	call    prt_lf
+    42                                  
+    43 00000029 68FFFFFFFF              	push    dword 0xFFFFFFFF
+    44 0000002E E8(00000000)            	call    prt_dec
+    45 00000033 81C404000000            	add     esp, 4
+    46 00000039 E827010000              	call    prt_lf
+    47                                  
+    48 0000003E 689F143400              	push    3413151
+    49 00000043 E8(00000000)            	call    prt_dec
+    50 00000048 81C404000000            	add     esp, 4
+    51 0000004E E812010000              	call    prt_lf
+    52                                  
+    53 00000053 53                      	push    ebx
+    54 00000054 E8(00000000)            	call    prt_dec
+    55 00000059 81C404000000            	add     esp, 4
+    56 0000005F E801010000              	call    prt_lf
+    57                                  
+    58 00000064 52                      	push    edx
+    59 00000065 E8(00000000)            	call    prt_dec
+    60 0000006A 81C404000000            	add     esp, 4
+    61 00000070 E8F0000000              	call    prt_lf
+    62                                  
+    63 00000075 57                      	push    edi
+    64 00000076 E8(00000000)            	call    prt_dec
+    65 0000007B 81C404000000            	add     esp, 4
+    66 00000081 E8DF000000              	call    prt_lf
+    67                                  
+    68 00000086 55                      	push    ebp
+    69 00000087 E8(00000000)            	call    prt_dec
+    70 0000008C 81C404000000            	add     esp, 4
+    71 00000092 E8CE000000              	call    prt_lf
+    72                                  
+    73 00000097 6802000000              	push    2
+    74 0000009C E8(00000000)            	call    prt_dec
+    75 000000A1 81C404000000            	add     esp, 4
+    76                                  
+    77 000000A7 B804000000              	mov     eax, SYSCALL_WRITE ; write message
+    78 000000AC BB01000000              	mov     ebx, STDOUT
+    79 000000B1 B9[01000000]            	mov     ecx, msg1
+    80 000000B6 BA06000000              	mov     edx, len1
+    81 000000BB CD80                    	int     080h
+    82                                  
+    83 000000BD 6803000000              	push    3
+    84 000000C2 E8(00000000)            	call    prt_dec
+    85 000000C7 81C404000000            	add     esp, 4
+    86                                  
+    87 000000CD B804000000              	mov     eax, SYSCALL_WRITE ; write message
+    88 000000D2 BB01000000              	mov     ebx, STDOUT
+    89 000000D7 B9[0E000000]            	mov     ecx, msg3
+    90 000000DC BA08000000              	mov     edx, len3
+    91 000000E1 CD80                    	int     080h
+    92                                  
+    93 000000E3 6805000000              	push    5
+    94 000000E8 E8(00000000)            	call    prt_dec
+    95 000000ED 81C404000000            	add     esp, 4
+    96 000000F3 E86D000000              	call    prt_lf
+    97                                  
+    98 000000F8 6807000000              	push    7
+    99 000000FD E8(00000000)            	call    prt_dec
+   100 00000102 81C404000000            	add     esp, 4
+   101                                  
+   102 00000108 B804000000              	mov     eax, SYSCALL_WRITE ; write message
+   103 0000010D BB01000000              	mov     ebx, STDOUT
+   104 00000112 B9[07000000]            	mov     ecx, msg2
+   105 00000117 BA07000000              	mov     edx, len2
+   106 0000011C CD80                    	int     080h
+   107                                  
+   108 0000011E 6804000000              	push    4
+   109 00000123 E8(00000000)            	call    prt_dec
+   110 00000128 81C404000000            	add     esp, 4
+   111                                  
+   112 0000012E B804000000              	mov     eax, SYSCALL_WRITE ; write message
+   113 00000133 BB01000000              	mov     ebx, STDOUT
+   114 00000138 B9[0E000000]            	mov     ecx, msg3
+   115 0000013D BA08000000              	mov     edx, len3
+   116 00000142 CD80                    	int     080h
+   117                                  
+   118 00000144 6803000000              	push    3
+   119 00000149 E8(00000000)            	call    prt_dec
+   120 0000014E 81C404000000            	add     esp, 4
+   121 00000154 E80C000000              	call    prt_lf
+   122                                  
+   123                                  
+   124                                  	;  final exit
+   125                                  	;
+   126                                  exit:
+   127 00000159 B801000000              	mov     EAX, SYSCALL_EXIT ; exit function
+   128 0000015E BB00000000              	mov     EBX, 0	     ; exit code, 0=normal
+   129 00000163 CD80                    	int     080h	     ; ask kernel to take over
+   130                                  
+   131                                  
+   132                                  
+   133                                  	;  A subroutine to print a LF, all registers are preserved
+   134                                  prt_lf:
+   135 00000165 50                      	push    eax
+   136 00000166 53                      	push    ebx
+   137 00000167 51                      	push    ecx
+   138 00000168 52                      	push    edx
+   139                                  
+   140 00000169 B804000000              	mov     eax, SYSCALL_WRITE ; write message
+   141 0000016E BB01000000              	mov     ebx, STDOUT
+   142 00000173 B9[00000000]            	mov     ecx, lf
+   143 00000178 BA01000000              	mov     edx, 1	; LF is a single character
+   144 0000017D CD80                    	int     080h
+   145                                  
+   146 0000017F 5A                      	pop     edx
+   147 00000180 59                      	pop     ecx
+   148 00000181 5B                      	pop     ebx
+   149 00000182 58                      	pop     eax
+   150 00000183 C3                      	ret

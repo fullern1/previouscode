@@ -1,0 +1,64 @@
+     1                                  ; File: bookcmp.asm
+     2                                  ;
+     3                                  ;Defines the bookcmp subroutine for use by the sort algorithm in sort_books.c
+     4                                  ;
+     5                                  %define TITLE_OFFSET 0
+     6                                  %define AUTHOR_OFFSET 33
+     7                                  %define SUBJECT_OFFSET 54
+     8                                  %define YEAR_OFFSET 68
+     9                                  	
+    10                                  
+    11                                          SECTION .text                   ; Code section.
+    12                                          global  bookcmp                 ; let loader see entry point
+    13                                  	;; 	extern	book1, book2		
+    14                                  
+    15                                  bookcmp:
+    16 00000000 55                      	push 	ebp
+    17 00000001 89E5                    	mov 	ebp, esp		; set up stack frame
+    18 00000003 57                      	push	edi			; push registers we want to use
+    19 00000004 56                      	push	esi
+    20                                  	
+    21 00000005 8B7D08                  	mov	edi, [ebp+8]		; get the pointer to the first book
+    22 00000008 8B4744                  	mov	eax, [edi + YEAR_OFFSET];   and fetch the year field
+    23 0000000B 8B750C                  	mov	esi, [ebp+12]		; Get the pointer to the second book
+    24 0000000E 3B4644                  	cmp	eax, [esi + YEAR_OFFSET]; and compare the year field to book1's
+    25 00000011 7523                    	jne	cmpDone			; If they're different, we're done
+    26                                  					; with comparisons
+    27                                  
+    28                                  cmpTitles:				; Fall through to here if years same
+    29 00000013 8B7D08                  	mov	edi, [ebp+8]		; Get address of book1's title
+    30 00000016 81C700000000            	add	edi, TITLE_OFFSET
+    31 0000001C 8B750C                  	mov	esi, [ebp+12]		; Get address of book2's title
+    32 0000001F 81C600000000            	add	esi, TITLE_OFFSET
+    33                                  
+    34 00000025 8A07                    L1:	mov	al, [edi]		; Fetch next char of book1's title
+    35 00000027 3A06                    	cmp	byte al, [esi]		; and compare it to matching char in
+    36                                  					; book 2
+    37 00000029 750B                    	jne	cmpDone			; If we find a difference, we are done
+    38                                  					; (note this also works w/single NULL)
+    39                                  
+    40                                  	;; Last special case: strings are identical up to, and including, NULL
+    41 0000002B 3C00                    	cmp	byte al, 0
+    42 0000002D 7407                    	je	cmpDone
+    43 0000002F 47                      	inc	edi
+    44 00000030 46                      	inc	esi
+    45 00000031 E9EFFFFFFF              	jmp	L1
+    46                                  
+    47                                  cmpDone:
+    48                                          ;; condition codes still hold result of the last compare, so use it
+    49 00000036 7F16                    	jg	L_gt
+    50 00000038 740A                    	je	L_eq
+    51 0000003A B8FFFFFFFF              	mov	eax, -1		; book1 is strictly less than book2
+    52 0000003F E90F000000              	jmp	end
+    53                                  	
+    54 00000044 B800000000              L_eq:	mov	eax, 0		; book1 equals book2
+    55 00000049 E905000000              	jmp	end
+    56                                  	
+    57 0000004E B801000000              L_gt:	mov	eax, 1		; book1 is strictly greater than book2
+    58                                  
+    59                                  	;; Clean up and finish
+    60 00000053 5E                      end:	pop	esi
+    61 00000054 5F                      	pop	edi
+    62 00000055 89EC                    	mov 	esp, ebp	; restore stack
+    63 00000057 5D                      	pop 	ebp		; restore frame
+    64 00000058 C3                      	ret

@@ -1,0 +1,774 @@
+Testing 2x2 problem
+Solving 0011 => 0000 optimal
+Solution of length 2 found after 0.0003 seconds and adding 16 states and 4 successors
+initial
+  00
+  11
+flip 0 =>
+  11
+  01
+flip 1 =>
+  00
+  00
+ 
+Solving 0011 => 0000 aggressive
+Solution of length 2 found after 0.0005 seconds and adding 40 states and 10 successors
+initial
+  00
+  11
+flip 0 =>
+  11
+  01
+flip 1 =>
+  00
+  00
+ 
+Solving 0111 => 0000 optimal
+Solution of length 1 found after 0.0001 seconds and adding 4 states and 1 successors
+initial
+  01
+  11
+flip 3 =>
+  00
+  00
+ 
+Solving 0111 => 0000 aggressive
+Solution of length 1 found after 0.0001 seconds and adding 4 states and 1 successors
+initial
+  01
+  11
+flip 3 =>
+  00
+  00
+ 
+Solving 0001 => 0000 optimal
+Solution of length 3 found after 0.0004 seconds and adding 32 states and 8 successors
+initial
+  00
+  01
+flip 2 =>
+  10
+  10
+flip 1 =>
+  01
+  11
+flip 3 =>
+  00
+  00
+ 
+Solving 0001 => 0000 aggressive
+Solution of length 3 found after 0.0005 seconds and adding 40 states and 10 successors
+initial
+  00
+  01
+flip 2 =>
+  10
+  10
+flip 1 =>
+  01
+  11
+flip 3 =>
+  00
+  00
+ 
+Solving 0100 => 0000 optimal
+Solution of length 3 found after 0.0004 seconds and adding 32 states and 8 successors
+initial
+  01
+  00
+flip 1 =>
+  10
+  01
+flip 0 =>
+  01
+  11
+flip 3 =>
+  00
+  00
+ 
+Solving 0100 => 0000 aggressive
+Solution of length 3 found after 0.0005 seconds and adding 40 states and 10 successors
+initial
+  01
+  00
+flip 1 =>
+  10
+  01
+flip 0 =>
+  01
+  11
+flip 3 =>
+  00
+  00
+ 
+Testing 3x3 problem
+Solving 011100010 => 000000000 optimal
+Solution of length 7 found after 0.3044 seconds and adding 3168 states and 352 successors
+initial
+  011
+  100
+  010
+flip 1 =>
+  100
+  110
+  010
+flip 3 =>
+  000
+  000
+  110
+flip 4 =>
+  010
+  111
+  100
+flip 2 =>
+  001
+  110
+  100
+flip 5 =>
+  000
+  101
+  101
+flip 6 =>
+  000
+  001
+  011
+flip 8 =>
+  000
+  000
+  000
+ 
+Solving 011100010 => 000000000 aggressive
+Solution of length 7 found after 0.2246 seconds and adding 1818 states and 202 successors
+initial
+  011
+  100
+  010
+flip 2 =>
+  000
+  101
+  010
+flip 6 =>
+  000
+  001
+  100
+flip 3 =>
+  100
+  111
+  000
+flip 4 =>
+  110
+  000
+  010
+flip 1 =>
+  001
+  010
+  010
+flip 5 =>
+  000
+  001
+  011
+flip 8 =>
+  000
+  000
+  000
+ 
+Solving 100100010 => 000000000 optimal
+Solution of length 5 found after 0.0826 seconds and adding 1008 states and 112 successors
+initial
+  100
+  100
+  010
+flip 1 =>
+  011
+  110
+  010
+flip 2 =>
+  000
+  111
+  010
+flip 6 =>
+  000
+  011
+  100
+flip 7 =>
+  000
+  001
+  011
+flip 8 =>
+  000
+  000
+  000
+ 
+Solving 100100010 => 000000000 aggressive
+Solution of length 5 found after 0.0348 seconds and adding 504 states and 56 successors
+initial
+  100
+  100
+  010
+flip 6 =>
+  100
+  000
+  100
+flip 1 =>
+  011
+  010
+  100
+flip 2 =>
+  000
+  011
+  100
+flip 7 =>
+  000
+  001
+  011
+flip 8 =>
+  000
+  000
+  000
+ 
+Solving 001110000 => 000000000 optimal
+Solution of length 2 found after 0.0015 seconds and adding 72 states and 8 successors
+initial
+  001
+  110
+  000
+flip 1 =>
+  110
+  100
+  000
+flip 0 =>
+  000
+  000
+  000
+ 
+Solving 001110000 => 000000000 aggressive
+Solution of length 2 found after 0.0010 seconds and adding 54 states and 6 successors
+initial
+  001
+  110
+  000
+flip 1 =>
+  110
+  100
+  000
+flip 0 =>
+  000
+  000
+  000
+ 
+Solving 110100010 => 000000000 optimal
+Solution of length 3 found after 0.0072 seconds and adding 207 states and 23 successors
+initial
+  110
+  100
+  010
+flip 1 =>
+  001
+  110
+  010
+flip 2 =>
+  010
+  111
+  010
+flip 4 =>
+  000
+  000
+  000
+ 
+Solving 110100010 => 000000000 aggressive
+Solution of length 3 found after 0.0047 seconds and adding 153 states and 17 successors
+initial
+  110
+  100
+  010
+flip 4 =>
+  100
+  011
+  000
+flip 1 =>
+  011
+  001
+  000
+flip 2 =>
+  000
+  000
+  000
+ 
+Testing 4x4 problem
+Solving 1110110011001000 => 0000000000000000 optimal
+Solution of length 2 found after 0.0005 seconds and adding 32 states and 2 successors
+initial
+  1110
+  1100
+  1100
+  1000
+flip 1 =>
+  0000
+  1000
+  1100
+  1000
+flip 8 =>
+  0000
+  0000
+  0000
+  0000
+ 
+Solving 1110110011001000 => 0000000000000000 aggressive
+Solution of length 2 found after 0.0006 seconds and adding 32 states and 2 successors
+initial
+  1110
+  1100
+  1100
+  1000
+flip 1 =>
+  0000
+  1000
+  1100
+  1000
+flip 8 =>
+  0000
+  0000
+  0000
+  0000
+ 
+Solving 0010110011110110 => 0000000000000000 optimal
+Solution of length 6 found after 10.7705 seconds and adding 13136 states and 821 successors
+initial
+  0010
+  1100
+  1111
+  0110
+flip 1 =>
+  1100
+  1000
+  1111
+  0110
+flip 0 =>
+  0000
+  0000
+  1111
+  0110
+flip 12 =>
+  0000
+  0000
+  0111
+  1010
+flip 13 =>
+  0000
+  0000
+  0011
+  0100
+flip 14 =>
+  0000
+  0000
+  0001
+  0011
+flip 15 =>
+  0000
+  0000
+  0000
+  0000
+ 
+Solving 0010110011110110 => 0000000000000000 aggressive
+Solution of length 6 found after 0.0377 seconds and adding 432 states and 27 successors
+initial
+  0010
+  1100
+  1111
+  0110
+flip 10 =>
+  0010
+  1110
+  1000
+  0100
+flip 4 =>
+  1010
+  0010
+  0000
+  0100
+flip 1 =>
+  0100
+  0110
+  0000
+  0100
+flip 5 =>
+  0000
+  1000
+  0100
+  0100
+flip 8 =>
+  0000
+  0000
+  1000
+  1100
+flip 12 =>
+  0000
+  0000
+  0000
+  0000
+ 
+Solving 1101000001111110 => 0000000000000000 optimal
+Solution of length 4 found after 0.0579 seconds and adding 624 states and 39 successors
+initial
+  1101
+  0000
+  0111
+  1110
+flip 13 =>
+  1101
+  0000
+  0011
+  0000
+flip 1 =>
+  0011
+  0100
+  0011
+  0000
+flip 6 =>
+  0001
+  0011
+  0001
+  0000
+flip 7 =>
+  0000
+  0000
+  0000
+  0000
+ 
+Solving 1101000001111110 => 0000000000000000 aggressive
+Solution of length 4 found after 0.0071 seconds and adding 176 states and 11 successors
+initial
+  1101
+  0000
+  0111
+  1110
+flip 13 =>
+  1101
+  0000
+  0011
+  0000
+flip 1 =>
+  0011
+  0100
+  0011
+  0000
+flip 6 =>
+  0001
+  0011
+  0001
+  0000
+flip 7 =>
+  0000
+  0000
+  0000
+  0000
+ 
+Solving 1111111001000010 => 0000000000000000 optimal
+Solution of length 4 found after 0.0457 seconds and adding 512 states and 32 successors
+initial
+  1111
+  1110
+  0100
+  0010
+flip 2 =>
+  1000
+  1100
+  0100
+  0010
+flip 4 =>
+  0000
+  0000
+  1100
+  0010
+flip 12 =>
+  0000
+  0000
+  0100
+  1110
+flip 13 =>
+  0000
+  0000
+  0000
+  0000
+ 
+Solving 1111111001000010 => 0000000000000000 aggressive
+Solution of length 4 found after 0.0046 seconds and adding 144 states and 9 successors
+initial
+  1111
+  1110
+  0100
+  0010
+flip 2 =>
+  1000
+  1100
+  0100
+  0010
+flip 4 =>
+  0000
+  0000
+  1100
+  0010
+flip 13 =>
+  0000
+  0000
+  1000
+  1100
+flip 12 =>
+  0000
+  0000
+  0000
+  0000
+ 
+Testing 5x5 problem
+Solving 0000001000101001010001000 => 0000000000000000000000000 optimal
+Solution of length 2 found after 0.0009 seconds and adding 50 states and 2 successors
+initial
+  00000
+  01000
+  10100
+  10100
+  01000
+flip 11 =>
+  00000
+  00000
+  01000
+  11100
+  01000
+flip 16 =>
+  00000
+  00000
+  00000
+  00000
+  00000
+ 
+Solving 0000001000101001010001000 => 0000000000000000000000000 aggressive
+Solution of length 2 found after 0.0011 seconds and adding 50 states and 2 successors
+initial
+  00000
+  01000
+  10100
+  10100
+  01000
+flip 11 =>
+  00000
+  00000
+  01000
+  11100
+  01000
+flip 16 =>
+  00000
+  00000
+  00000
+  00000
+  00000
+ 
+Solving 0000001100100100111000111 => 0000000000000000000000000 optimal
+Solution of length 3 found after 0.0020 seconds and adding 75 states and 3 successors
+initial
+  00000
+  01100
+  10010
+  01110
+  00111
+flip 11 =>
+  00000
+  00100
+  01110
+  00110
+  00111
+flip 12 =>
+  00000
+  00000
+  00000
+  00010
+  00111
+flip 23 =>
+  00000
+  00000
+  00000
+  00000
+  00000
+ 
+Solving 0000001100100100111000111 => 0000000000000000000000000 aggressive
+Solution of length 3 found after 0.0025 seconds and adding 75 states and 3 successors
+initial
+  00000
+  01100
+  10010
+  01110
+  00111
+flip 23 =>
+  00000
+  01100
+  10010
+  01100
+  00000
+flip 11 =>
+  00000
+  00100
+  01110
+  00100
+  00000
+flip 12 =>
+  00000
+  00000
+  00000
+  00000
+  00000
+ 
+Solving 0100011110110111010010100 => 0000000000000000000000000 optimal
+Solution of length 4 found after 0.0070 seconds and adding 150 states and 6 successors
+initial
+  01000
+  11110
+  11011
+  10100
+  10100
+flip 6 =>
+  00000
+  00010
+  10011
+  10100
+  10100
+flip 13 =>
+  00000
+  00000
+  10100
+  10110
+  10100
+flip 15 =>
+  00000
+  00000
+  00100
+  01110
+  00100
+flip 17 =>
+  00000
+  00000
+  00000
+  00000
+  00000
+ 
+Solving 0100011110110111010010100 => 0000000000000000000000000 aggressive
+Solution of length 4 found after 0.0028 seconds and adding 100 states and 4 successors
+initial
+  01000
+  11110
+  11011
+  10100
+  10100
+flip 6 =>
+  00000
+  00010
+  10011
+  10100
+  10100
+flip 15 =>
+  00000
+  00010
+  00011
+  01100
+  00100
+flip 13 =>
+  00000
+  00000
+  00100
+  01110
+  00100
+flip 17 =>
+  00000
+  00000
+  00000
+  00000
+  00000
+ 
+Solving 0000101011111001111110111 => 0000000000000000000000000 optimal
+Solution of length 5 found after 0.2217 seconds and adding 1175 states and 47 successors
+initial
+  00001
+  01011
+  11100
+  11111
+  10111
+flip 9 =>
+  00000
+  01000
+  11101
+  11111
+  10111
+flip 11 =>
+  00000
+  00000
+  00001
+  10111
+  10111
+flip 19 =>
+  00000
+  00000
+  00000
+  10100
+  10110
+flip 20 =>
+  00000
+  00000
+  00000
+  00100
+  01110
+flip 22 =>
+  00000
+  00000
+  00000
+  00000
+  00000
+ 
+Solving 0000101011111001111110111 => 0000000000000000000000000 aggressive
+Solution of length 7 found after 0.0313 seconds and adding 400 states and 16 successors
+initial
+  00001
+  01011
+  11100
+  11111
+  10111
+flip 11 =>
+  00001
+  00011
+  00000
+  10111
+  10111
+flip 23 =>
+  00001
+  00011
+  00000
+  10101
+  10000
+flip 9 =>
+  00000
+  00000
+  00001
+  10101
+  10000
+flip 20 =>
+  00000
+  00000
+  00001
+  00101
+  01000
+flip 19 =>
+  00000
+  00000
+  00000
+  00110
+  01001
+flip 22 =>
+  00000
+  00000
+  00000
+  00010
+  00111
+flip 23 =>
+  00000
+  00000
+  00000
+  00000
+  00000
+ 

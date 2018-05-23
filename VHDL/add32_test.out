@@ -1,0 +1,17 @@
+ncsim: 06.11-s008: (c) Copyright 1995-2007 Cadence Design Systems, Inc.
+ncsim> run 160 ns
+Driver starting.
+    a=00000000,    b=FFFFFFFF,  cin=0
+  sum=FFFFFFFF, cout=0,   s2=FFFFFFFF,  co2=0, cntr=0000,  at=38 ns
+
+    a=10000111,    b=FFFFFFFF,  cin=1
+  sum=10000111, cout=1,   s2=10000111,  co2=1, cntr=0001,  at=78 ns
+
+    a=20000222,    b=FFFFFFFF,  cin=0
+  sum=20000221, cout=1,   s2=20000221,  co2=1, cntr=0010,  at=118 ns
+
+    a=30000333,    b=FFFFFFFF,  cin=1
+  sum=30000333, cout=1,   s2=30000333,  co2=1, cntr=0011,  at=158 ns
+
+Ran until 160 NS + 0
+ncsim> exit

@@ -1,0 +1,5 @@
+((remove-can-lid can1 red)
+ (pick-up brush1)
+ (load-brush brush1 can1 red)
+ (paint a red brush1)
+ (stack brush1 can1))

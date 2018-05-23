@@ -1,0 +1,12 @@
+#!/bin/csh -x
+
+# uses blackbox to solve all of the files matching *.pddl (except for
+# the domain.pddl file) and puts the output into *.pddl.out
+
+set DOMAIN = hw5_domain.pddl
+
+foreach f (p*.pddl)
+    if ( $f !~ domain*) then
+	blackbox -o $DOMAIN -f $f -g $f.out
+    endif
+end

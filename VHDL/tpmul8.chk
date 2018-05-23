@@ -1,0 +1,21 @@
+ncsim: 06.11-s008: (c) Copyright 1995-2007 Cadence Design Systems, Inc.
+ncsim> run 33 ns
+Driver starting.
+ a=00, b=FF, prod=0000, cntr=0, at=1 ns
+ a=FF, b=00, prod=0000, cntr=1, at=3 ns
+ a=88, b=88, prod=4840, cntr=2, at=5 ns
+ a=20, b=DD, prod=1BA0, cntr=3, at=7 ns
+ a=33, b=0C, prod=0264, cntr=4, at=9 ns
+ a=44, b=BB, prod=31AC, cntr=5, at=11 ns
+ a=55, b=AA, prod=3872, cntr=6, at=13 ns
+ a=66, b=99, prod=3CF6, cntr=7, at=15 ns
+ a=77, b=88, prod=3F38, cntr=8, at=17 ns
+ a=88, b=77, prod=3F38, cntr=9, at=19 ns
+ a=99, b=66, prod=3CF6, cntr=10, at=21 ns
+ a=AA, b=45, prod=2DD2, cntr=11, at=23 ns
+ a=BB, b=43, prod=30F1, cntr=12, at=25 ns
+ a=CC, b=33, prod=28A4, cntr=13, at=27 ns
+ a=DD, b=22, prod=1D5A, cntr=14, at=29 ns
+ a=EE, b=11, prod=0FCE, cntr=15, at=31 ns
+Ran until 33 NS + 0
+ncsim> exit

@@ -1,0 +1,153 @@
+NIM with heaps [1] using players random and random
+  Player1 moves (0, 1) => [0]
+GameState(to_move=2, utility=0, board=[0], moves=[])
+Player 2 wins
+
+NIM with heaps [3] using players random and random
+  Player1 moves (0, 2) => [1]
+  Player2 moves (0, 1) => [0]
+GameState(to_move=1, utility=0, board=[0], moves=[])
+Player 1 wins
+
+NIM with heaps [1, 1] using players ab and ab
+  Player1 moves (1, 1) => [1, 0]
+  Player2 moves (0, 1) => [0, 0]
+GameState(to_move=1, utility=0, board=[0, 0], moves=[])
+Player 1 wins
+
+NIM with heaps [1, 1, 1] using players ab and ab
+  Player1 moves (2, 1) => [1, 1, 0]
+  Player2 moves (1, 1) => [1, 0, 0]
+  Player1 moves (0, 1) => [0, 0, 0]
+GameState(to_move=2, utility=0, board=[0, 0, 0], moves=[])
+Player 2 wins
+
+NIM with heaps [1, 1, 1, 1] using players ab and ab
+  Player1 moves (3, 1) => [1, 1, 1, 0]
+  Player2 moves (2, 1) => [1, 1, 0, 0]
+  Player1 moves (1, 1) => [1, 0, 0, 0]
+  Player2 moves (0, 1) => [0, 0, 0, 0]
+GameState(to_move=1, utility=0, board=[0, 0, 0, 0], moves=[])
+Player 1 wins
+
+NIM with heaps [2, 2] using players ab and ab
+  Player1 moves (1, 2) => [2, 0]
+  Player2 moves (0, 1) => [1, 0]
+  Player1 moves (0, 1) => [0, 0]
+GameState(to_move=2, utility=0, board=[0, 0], moves=[])
+Player 2 wins
+
+NIM with heaps [5, 4, 3, 2, 1] using players ab2 and ab3
+  Player1 moves (4, 1) => [5, 4, 3, 2, 0]
+  Player2 moves (3, 2) => [5, 4, 3, 0, 0]
+  Player1 moves (2, 3) => [5, 4, 0, 0, 0]
+  Player2 moves (1, 2) => [5, 2, 0, 0, 0]
+  Player1 moves (1, 2) => [5, 0, 0, 0, 0]
+  Player2 moves (0, 4) => [1, 0, 0, 0, 0]
+  Player1 moves (0, 1) => [0, 0, 0, 0, 0]
+GameState(to_move=2, utility=0, board=[0, 0, 0, 0, 0], moves=[])
+Player 2 wins
+
+NIM with heaps [5, 4, 3, 2, 1] using players ab3 and ab2
+  Player1 moves (4, 1) => [5, 4, 3, 2, 0]
+  Player2 moves (3, 2) => [5, 4, 3, 0, 0]
+  Player1 moves (2, 3) => [5, 4, 0, 0, 0]
+  Player2 moves (1, 4) => [5, 0, 0, 0, 0]
+  Player1 moves (0, 4) => [1, 0, 0, 0, 0]
+  Player2 moves (0, 1) => [0, 0, 0, 0, 0]
+GameState(to_move=1, utility=0, board=[0, 0, 0, 0, 0], moves=[])
+Player 1 wins
+
+NIM with heaps [7, 6, 5, 4, 3, 2, 1] using players ab2 and ab3
+  Player1 moves (6, 1) => [7, 6, 5, 4, 3, 2, 0]
+  Player2 moves (5, 2) => [7, 6, 5, 4, 3, 0, 0]
+  Player1 moves (4, 3) => [7, 6, 5, 4, 0, 0, 0]
+  Player2 moves (3, 4) => [7, 6, 5, 0, 0, 0, 0]
+  Player1 moves (2, 5) => [7, 6, 0, 0, 0, 0, 0]
+  Player2 moves (1, 4) => [7, 2, 0, 0, 0, 0, 0]
+  Player1 moves (1, 2) => [7, 0, 0, 0, 0, 0, 0]
+  Player2 moves (0, 6) => [1, 0, 0, 0, 0, 0, 0]
+  Player1 moves (0, 1) => [0, 0, 0, 0, 0, 0, 0]
+GameState(to_move=2, utility=0, board=[0, 0, 0, 0, 0, 0, 0], moves=[])
+Player 2 wins
+
+NIM with heaps [7, 6, 5, 4, 3, 2, 1] using players ab3 and ab2
+  Player1 moves (6, 1) => [7, 6, 5, 4, 3, 2, 0]
+  Player2 moves (5, 2) => [7, 6, 5, 4, 3, 0, 0]
+  Player1 moves (4, 3) => [7, 6, 5, 4, 0, 0, 0]
+  Player2 moves (3, 4) => [7, 6, 5, 0, 0, 0, 0]
+  Player1 moves (2, 5) => [7, 6, 0, 0, 0, 0, 0]
+  Player2 moves (1, 6) => [7, 0, 0, 0, 0, 0, 0]
+  Player1 moves (0, 6) => [1, 0, 0, 0, 0, 0, 0]
+  Player2 moves (0, 1) => [0, 0, 0, 0, 0, 0, 0]
+GameState(to_move=1, utility=0, board=[0, 0, 0, 0, 0, 0, 0], moves=[])
+Player 1 wins
+
+NIM with heaps [7, 6, 5, 4, 3, 2, 1, 1, 1, 1] using players ab2 and ab3
+  Player1 moves (9, 1) => [7, 6, 5, 4, 3, 2, 1, 1, 1, 0]
+  Player2 moves (8, 1) => [7, 6, 5, 4, 3, 2, 1, 1, 0, 0]
+  Player1 moves (7, 1) => [7, 6, 5, 4, 3, 2, 1, 0, 0, 0]
+  Player2 moves (6, 1) => [7, 6, 5, 4, 3, 2, 0, 0, 0, 0]
+  Player1 moves (5, 2) => [7, 6, 5, 4, 3, 0, 0, 0, 0, 0]
+  Player2 moves (4, 3) => [7, 6, 5, 4, 0, 0, 0, 0, 0, 0]
+  Player1 moves (3, 4) => [7, 6, 5, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (2, 5) => [7, 6, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (1, 6) => [7, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (0, 6) => [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (0, 1) => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+GameState(to_move=2, utility=0, board=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], moves=[])
+Player 2 wins
+
+NIM with heaps [7, 6, 5, 4, 3, 2, 1, 1, 1, 1] using players ab3 and ab2
+  Player1 moves (9, 1) => [7, 6, 5, 4, 3, 2, 1, 1, 1, 0]
+  Player2 moves (8, 1) => [7, 6, 5, 4, 3, 2, 1, 1, 0, 0]
+  Player1 moves (7, 1) => [7, 6, 5, 4, 3, 2, 1, 0, 0, 0]
+  Player2 moves (6, 1) => [7, 6, 5, 4, 3, 2, 0, 0, 0, 0]
+  Player1 moves (5, 2) => [7, 6, 5, 4, 3, 0, 0, 0, 0, 0]
+  Player2 moves (4, 3) => [7, 6, 5, 4, 0, 0, 0, 0, 0, 0]
+  Player1 moves (3, 4) => [7, 6, 5, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (2, 5) => [7, 6, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (1, 4) => [7, 2, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (1, 2) => [7, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (0, 6) => [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (0, 1) => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+GameState(to_move=1, utility=0, board=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0], moves=[])
+Player 1 wins
+
+NIM with heaps [7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7] using players ab2 and ab2
+  Player1 moves (12, 7) => [7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 0]
+  Player2 moves (11, 6) => [7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 0, 0]
+  Player1 moves (10, 5) => [7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 0, 0, 0]
+  Player2 moves (9, 4) => [7, 6, 5, 4, 3, 2, 1, 2, 3, 0, 0, 0, 0]
+  Player1 moves (8, 3) => [7, 6, 5, 4, 3, 2, 1, 2, 0, 0, 0, 0, 0]
+  Player2 moves (7, 2) => [7, 6, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0]
+  Player1 moves (6, 1) => [7, 6, 5, 4, 3, 2, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (5, 2) => [7, 6, 5, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (4, 3) => [7, 6, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (3, 4) => [7, 6, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (2, 5) => [7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (1, 6) => [7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (0, 6) => [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (0, 1) => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+GameState(to_move=1, utility=0, board=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], moves=[])
+Player 1 wins
+
+NIM with heaps [7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7] using players ab3 and ab3
+  Player1 moves (12, 7) => [7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 0]
+  Player2 moves (11, 6) => [7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 0, 0]
+  Player1 moves (10, 5) => [7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 0, 0, 0]
+  Player2 moves (9, 4) => [7, 6, 5, 4, 3, 2, 1, 2, 3, 0, 0, 0, 0]
+  Player1 moves (8, 3) => [7, 6, 5, 4, 3, 2, 1, 2, 0, 0, 0, 0, 0]
+  Player2 moves (7, 2) => [7, 6, 5, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0]
+  Player1 moves (6, 1) => [7, 6, 5, 4, 3, 2, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (5, 2) => [7, 6, 5, 4, 3, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (4, 3) => [7, 6, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (3, 4) => [7, 6, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (2, 5) => [7, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (1, 4) => [7, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (1, 2) => [7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player2 moves (0, 6) => [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  Player1 moves (0, 1) => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+GameState(to_move=2, utility=0, board=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], moves=[])
+Player 2 wins
+

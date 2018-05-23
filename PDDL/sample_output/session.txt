@@ -1,0 +1,64 @@
+$ blackbox -o hw5_domain.pddl -f test2.pddl
+
+blackbox version 43
+command line:  blackbox -o hw5_domain.pddl -f test2.pddl
+
+Begin solver specification
+    -maxint        0   -maxsec 0.000000  chaff
+End solver specification
+Loading domain file: hw5_domain.pddl
+Loading fact file: test2.pddl
+Problem name: test2
+Facts loaded.
+time: 1, 27 facts and 6 exclusive pairs.
+time: 2, 28 facts and 6 exclusive pairs.
+time: 3, 30 facts and 16 exclusive pairs.
+time: 4, 32 facts and 24 exclusive pairs.
+time: 5, 34 facts and 36 exclusive pairs.
+time: 6, 38 facts and 68 exclusive pairs.
+time: 7, 39 facts and 69 exclusive pairs.
+time: 8, 44 facts and 126 exclusive pairs.
+Goals first reachable in 8 steps.
+651 nodes created.
+
+####################################################
+goals at time 9:
+  on_d_c on_c_b on_b_a on-table_a clear_d 
+
+
+
+----------------------------------------------------
+** Turning off completeness check **
+Converting graph to wff
+number of action variables = 151
+number of fluent variables = 99
+total number variables = 250
+number clauses = 1455
+Result is Sat
+Iteration was 0
+Performing plan justification:
+   0 actions were pruned in 0.00 seconds
+
+----------------------------------------------------
+Begin plan
+1 (unstack a b)
+2 (put-down a)
+3 (unstack b c)
+4 (stack b a)
+5 (unstack c d)
+6 (stack c b)
+7 (pick-up d)
+8 (stack d c)
+End plan
+----------------------------------------------------
+
+8 total actions in plan
+0 entries in hash table, 
+7 total set-creation steps (entries + hits + plan length - 1)
+0 actions tried
+
+####################################################
+Total elapsed time:   0.01 seconds
+Time in milliseconds: 10
+
+####################################################

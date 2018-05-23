@@ -1,0 +1,14 @@
+#!/bin/csh
+
+# use blackbox to solve one hw5 problem, writes output to $1.out
+# usage: solveone <pddl file>
+# e.g.: solveone test1.pddl
+
+if ($#argv != 1) then
+  echo "usage: solveone <pddl file>"
+else
+  echo "Running blackbox -o hw5_domain.pddl -f $1 -g $1.out"
+  blackbox -o hw5_domain.pddl -f $1 -g $1.out
+endif
+
+

@@ -1,0 +1,13 @@
+[
+{'acctno':'A-101',	'branch':'Downtown',	'balance':500, 'customers':['Johnson', 'Hayes']},
+{'acctno':'A-215',	'branch':'Mianus',	'balance':700, 'customers':['Smith']},
+{'acctno':'A-102',	'branch':'Perryridge',	'balance':400, 'customers':['Hayes']},
+{'acctno':'A-305',	'branch':'Round Hill',	'balance':350, 'customers':['Turner']},
+{'acctno':'A-201',	'branch':'Perryridge',	'balance':900, 'customers':['Johnson']},
+{'acctno':'A-222',	'branch':'Redwood',	'balance':700, 'customers':['Lindsay']},
+{'acctno':'A-217',	'branch':'Brighton',	'balance':750, 'customers':['Jones']},
+{'acctno':'A-333',	'branch':'Central',	'balance':850, 'customers':['Majeris']},
+{'acctno':'A-444',	'branch':'North Town', 'balance':625, 'customers':['Smith']}
+]
+
+

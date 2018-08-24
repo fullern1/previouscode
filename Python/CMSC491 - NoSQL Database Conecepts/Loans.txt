@@ -1,0 +1,11 @@
+[
+{'loanNo':'L-17',	'branch':'Downtown',	'amt':1000, 'customers':['Jones', 'Williams']},
+{'loanNo':'L-23',	'branch':'Redwood',	'amt':2000, 'customers':['Smith']},
+{'loanNo':'L-15',	'branch':'Perryridge',	'amt':1500, 'customers':['Hayes']},
+{'loanNo':'L-14',	'branch':'Downtown',	'amt':1500, 'customers':['Jackson']},
+{'loanNo':'L-93',	'branch':'Mianus',	'amt':500, 'customers':['Curry']},
+{'loanNo':'L-11',	'branch':'Round Hill',	'amt':900, 'customers':['Smith']},
+{'loanNo':'L-16',	'branch':'Perryridge',	'amt':1300, 'customers':['Adams']},
+{'loanNo':'L-20',	'branch':'North Town', 'amt':7500, 'customers':['McBride']},
+{'loanNo':'L-21',	'branch':'Central',	'amt':570, 'customers':['Smith']}
+]

@@ -1,0 +1,11 @@
+[
+{'name':'Downtown',	'city':'Brooklyn'},
+{'name':'Redwood',	'city':'Palo Alto'},
+{'name':'Perryridge',	'city':'Horseneck'},
+{'name':'Mianus',	'city':'Horseneck'},
+{'name':'Round Hill',	'city':'Horseneck'},
+{'name':'Pownal',	'city':'Bennington'},
+{'name':'North Town','city':'Rye'},
+{'name':'Brighton',	'city':'Brooklyn'},
+{'name':'Central',	'city':'Rye'}
+]

@@ -1,0 +1,17 @@
+[
+{'name':'Jones','street':'Main','city':'Harrison', 'accts':['A-217'], 'loans':['L-17']},
+{'name':'Smith','street':'Main','city':'Rye', 'accts':['A-215', 'A-444'], 'loans':['L-23', 'L-11', 'L-21']},
+{'name':'Hayes','street':'Main','city':'Harrison', 'accts':['A-101', 'A-102'], 'loans':['L-15']},
+{'name':'Lindsay','street':'Park','city':'Pittsfield', 'accts':['A-222']},
+{'name':'Turner','street':'Putnam','city':'Stamford', 'accts':['A-305']},
+{'name':'Williams','street':'Nassau','city':'Princeton', 'loans':['L-17']},
+{'name':'Adams','street':'Spring','city':'Pittsfield', 'loans':['L-16']},
+{'name':'Johnson','street':'Alma','city':'Palo Alto', 'accts':['A-101', 'A-201']},
+{'name':'Glenn','street':'Sand Hill','city':'Woodside'},
+{'name':'Brooks','street':'Senator','city':'Brooklyn'},
+{'name':'Green','street':'Walnut','city':'Stamford'},
+{'name':'Jackson','street':'University','city':'Salt Lake', 'loans':['L-14']},
+{'name':'Majeris','street':'Safety','city':'Rye', 'accts':['A-333']},
+{'name':'Curry', 'street':'Walnut', 'city':'Stamford', 'loans':['L-93']},
+{'name':'McBride', 'street':'Main', 'city':'Harrison', 'loans':['L-20']}
+]

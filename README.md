@@ -1,5 +1,5 @@
 # previouscode
-Homework assignments and projects from past CMSC courses.
+Homework assignments and projects from previous CMSC courses.
 
 Organized by language with descriptions and files provided by professors if available.
 
